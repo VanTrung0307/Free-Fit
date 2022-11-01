@@ -1,0 +1,61 @@
+.leaflet-marker-pane img {
+  background: transparent;
+  border: none;
+}
+.leaflet-control-layers-toggle {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQry8qyzDS-1yEJ53dxUD2ZCP1XWi_OrXr3PA&usqp=CAU') !important;
+  width: 40px;
+  height: 40px;
+  background-size: 40px;
+}
+.leaflet-control-zoom-in {
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+}
+.leaflet-control-zoom-out {
+  border-bottom-left-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+}
+.leaflet-control-zoom {
+  border-radius: 10px !important;
+  background: #fff !important;
+  border: none !important;
+}
+.leaflet-control-locate {
+  border-radius: 10px !important;
+  background: #fff !important;
+  border: none !important;
+}
+.geosearch {
+  border-radius: 10px !important;
+  background: #fff !important;
+  border: none !important;
+}
+.leaflet-control-fullscreen {
+  border-radius: 10px !important;
+  background: #fff !important;
+  border: none !important;
+}
+.leaflet-bar-part {
+  border-radius: 10px !important;
+  border: none !important;
+}
+.leaflet-control-fullscreen-button {
+  border-radius: 10px !important;
+  border: none !important;
+}
+.leaflet-control-layers-expanded {
+  background-color: rgba(22, 28, 36, 0.72) !important;
+  backdrop-filter: blur(8px);
+}
+.leaflet-control-layers-list {
+  color: #fff;
+  font-size: 17px;
+}
+.leaflet-popup-content-wrapper {
+  background-color: rgba(22, 28, 36, 0.72) !important;
+  color: #fff;
+}
+.leaflet-popup-tip {
+  background-color: rgba(22, 28, 36, 0.72) !important;
+}
