@@ -197,20 +197,20 @@ export default function CustomerList() {
       <Page title={'Customer'}>
         <Container maxWidth={themeStretch ? false : 'lg'}>
           <HeaderBreadcrumbs
-            heading={'Customer'}
+            heading={'Khách hàng'}
             links={[
               { name: t('content.dashboard'), href: PATH_DASHBOARD.root },
 
-              { name: 'Customer' },
+              { name: 'Khách hàng' },
             ]}
             action={
               <Button
                 variant="contained"
                 component={RouterLink}
-                to={PATH_DASHBOARD.store.add}
+                to={PATH_DASHBOARD.customer.add}
                 startIcon={<Icon icon={plusFill} />}
               >
-                {t('store.btnAdd')}
+                {'Thêm Khách Hàng'}
               </Button>
             }
           />

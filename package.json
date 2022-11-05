@@ -57,6 +57,7 @@
     "@mui/lab": "^5.0.0-alpha.47",
     "@mui/material": "^5.0.0",
     "@mui/styles": "^5.0.0",
+    "@mui/x-date-pickers": "^5.0.7",
     "@react-leaflet/core": "1.0.2",
     "@reduxjs/toolkit": "^1.6.1",
     "@skyeer/react-leaflet-custom-control": "^0.0.6",

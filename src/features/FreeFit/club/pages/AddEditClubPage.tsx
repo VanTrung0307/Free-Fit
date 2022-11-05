@@ -28,7 +28,7 @@ interface AddEditStorePageProps {}
 //   borderRadius: theme.shape.borderRadiusSm,
 // }));
 
-export default function AddEditStorePage(props: AddEditStorePageProps) {
+export default function AddEditCPage(props: AddEditStorePageProps) {
   const { storeId } = useParams();
   const isEdit = Boolean(storeId);
   const dispatch = useAppDispatch();

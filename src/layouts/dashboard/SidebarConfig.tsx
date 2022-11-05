@@ -47,25 +47,25 @@ export default function SidebarConfig() {
           path: PATH_DASHBOARD.analytics,
           icon: ICONS.dashboard,
         },
-        // {
-        //   title: 'Báo cáo',
-        //   path: PATH_DASHBOARD.overviewDate,
-        //   icon: ICONS.calendar,
-        // },
-        // {
-        //   title: t('content.asset'),
-        //   path: PATH_DASHBOARD.asset.root,
-        //   icon: ICONS.asset,
-        //   children: [
-        //     { title: t('asset.list'), path: PATH_DASHBOARD.asset.assets },
-        //     { title: t('asset.violationLogs'), path: PATH_DASHBOARD.asset.violations },
-        //   ],
-        // },
-        // {
-        //   title: 'Cửa hàng',
-        //   path: PATH_DASHBOARD.store.root,
-        //   icon: ICONS.store,
-        // },
+        {
+          title: 'Báo cáo',
+          path: PATH_DASHBOARD.overviewDate,
+          icon: ICONS.calendar,
+        },
+        {
+          title: t('content.asset'),
+          path: PATH_DASHBOARD.asset.root,
+          icon: ICONS.asset,
+          children: [
+            { title: t('asset.list'), path: PATH_DASHBOARD.asset.assets },
+            { title: t('asset.violationLogs'), path: PATH_DASHBOARD.asset.violations },
+          ],
+        },
+        {
+          title: 'Cửa hàng',
+          path: PATH_DASHBOARD.store.root,
+          icon: ICONS.store,
+        },
         {
           title: 'Customer',
           path: PATH_DASHBOARD.customer.root,

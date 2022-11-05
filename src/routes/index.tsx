@@ -40,8 +40,9 @@ export default function Router() {
     // Dashboard Routes
     {
       path: 'dashboard',
-      // element: isLogIn ? <DashboardLayout /> : <Navigate to="/login" />,
-      element: <DashboardLayout />,
+      element: isLogIn ? <DashboardLayout /> : <Navigate to="/login" />,
+
+      // element: <DashboardLayout />,
       children: [
         { path: '/', element: <Navigate to="/dashboard/analytics" replace /> },
         {
@@ -62,9 +63,9 @@ export default function Router() {
           path: 'manage-customer',
           children: [
             { path: '/', element: <CustomerList /> },
-            { path: 'add', element: <AddEditStorePage /> },
+            { path: 'add', element: <AddEditCustomerPage /> },
             { path: 'details/:storeId', element: <StoreViewPage /> },
-            { path: 'details/edit-info/:storeId', element: <AddEditStorePage /> },
+            { path: 'details/edit-info/:storeId', element: <AddEditCustomerPage /> },
             { path: 'details/edit-attrs/:storeId/:storeTypeId', element: <EditAttrsPage /> },
             {
               path: 'details/edit-templates/:storeId/:isStoreView',
@@ -354,4 +355,7 @@ const Report = Loadable(lazy(() => import('features/report')));
 
 // FreeFit
 const CustomerList = Loadable(lazy(() => import('features/FreeFit/customer/pages/CustomerList')));
+const AddEditCustomerPage = Loadable(
+  lazy(() => import('features/FreeFit/customer/pages/AddEditCustomerPage'))
+);
 const ClubList = Loadable(lazy(() => import('features/FreeFit/club/pages/ClubList')));

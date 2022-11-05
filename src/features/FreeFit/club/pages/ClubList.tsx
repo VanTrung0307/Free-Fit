@@ -144,18 +144,26 @@ export default function ClubList() {
     //   },
     //   sortable: false,
     // },
+    { title: 'Tên Phòng Tập', dataIndex: 'brandName', hideInSearch: true, sortable: false },
     {
-      title: 'Họ và Tên',
-      dataIndex: 'name',
-      hideInSearch: true,
-      sortable: false,
-    },
-    {
-      title: 'Họ và Tên',
-      dataIndex: 'KeySearch',
-      valueType: 'text',
+      title: 'Tên Phòng Tập',
+      dataIndex: 'brandName',
       hideInTable: true,
-      hideInSearch: brandName!,
+      valueEnum: brandTypeOptions.map((item) => ({ label: item.name, value: item.id })),
+      render(value, data, index) {
+        return value;
+      },
+      renderFormItem() {
+        return (
+          <Autocomplete
+            value={brandName}
+            onChange={handleChange}
+            id="controllable-states-demo"
+            options={brandOptions}
+            renderInput={(params) => <TextField {...params} label="Tên Phòng Tập" />}
+          />
+        );
+      },
       sortable: false,
     },
     {
@@ -197,8 +205,11 @@ export default function ClubList() {
       <Page title={t('store.title')}>
         <Container maxWidth={themeStretch ? false : 'lg'}>
           <HeaderBreadcrumbs
-            heading={'Club'}
-            links={[{ name: t('content.dashboard'), href: PATH_DASHBOARD.root }, { name: 'Club' }]}
+            heading={'Phòng tập'}
+            links={[
+              { name: t('content.dashboard'), href: PATH_DASHBOARD.root },
+              { name: 'Phòng tập' },
+            ]}
             action={
               <Button
                 variant="contained"
@@ -206,7 +217,7 @@ export default function ClubList() {
                 to={PATH_DASHBOARD.store.add}
                 startIcon={<Icon icon={plusFill} />}
               >
-                {t('store.btnAdd')}
+                {'Thêm Phòng Tập'}
               </Button>
             }
           />

@@ -43,6 +43,7 @@ export const PATH_DASHBOARD = {
   },
   customer: {
     root: path(ROOTS_DASHBOARD, '/manage-customer'),
+    add: path(ROOTS_DASHBOARD, '/manage-customer/add'),
   },
   club: {
     root: path(ROOTS_DASHBOARD, '/manage-club'),

@@ -19,11 +19,6 @@ type InitialValues = {
   afterSubmit?: string;
 };
 
-const fakeLogin = {
-  username: 'admin',
-  password: 'admin',
-};
-
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
@@ -40,13 +35,17 @@ export default function LoginForm() {
       password: '',
     },
     validationSchema: LoginSchema,
-    onSubmit: async (values) => {
-      dispatch(
-        authAction.login({
-          username: values.username,
-          password: values.password,
-        })
-      );
+    onSubmit: (values) => {
+      // dispatch(
+      //   authAction.login({
+      //     username: values.username,
+      //     password: values.password,
+      //   })
+      // );
+      // const userToken = localStorage.getItem('access_token');
+      if (values.username == fakeLogin.username && values.password == fakeLogin.password)
+        localStorage.setItem('access_token', 'random_code');
+      window.location.reload();
     },
   });
 
@@ -56,6 +55,10 @@ export default function LoginForm() {
     setShowPassword((show) => !show);
   };
 
+  const fakeLogin = {
+    username: 'admin',
+    password: 'admin',
+  };
   return (
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>

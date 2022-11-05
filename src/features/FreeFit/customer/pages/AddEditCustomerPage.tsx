@@ -1,5 +1,4 @@
 import { Box, Container } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import storeApi from 'api/storeApi';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import HeaderBreadcrumbs from 'components/HeaderBreadcrumbs';
@@ -12,11 +11,11 @@ import { PostStore, Store } from 'models';
 import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams, useLocation } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 import { PATH_DASHBOARD } from 'routes/paths';
 import { getCurrentUser } from 'utils/common';
-import StoreForm from '../components/StoreForm';
-import { storeActions, selectBuilding } from '../storeSlice';
+import CustomerForm from '../components/CustomerForm';
+import { selectBuilding, storeActions } from '../storeSlice';
 import './style.css';
 
 interface AddEditStorePageProps {}
@@ -28,7 +27,7 @@ interface AddEditStorePageProps {}
 //   borderRadius: theme.shape.borderRadiusSm,
 // }));
 
-export default function AddEditStorePage(props: AddEditStorePageProps) {
+export default function AddEditCustomerPage(props: AddEditStorePageProps) {
   const { storeId } = useParams();
   const isEdit = Boolean(storeId);
   const dispatch = useAppDispatch();
@@ -140,8 +139,8 @@ export default function AddEditStorePage(props: AddEditStorePageProps) {
 
   const links = [
     { name: 'Dashboard', href: PATH_DASHBOARD.root },
-    { name: t('store.title'), href: PATH_DASHBOARD.store.root },
-    { name: !isEdit ? t('store.btnAdd') : t('store.editInfo') },
+    { name: 'Quản lí khách hàng', href: PATH_DASHBOARD.customer.root },
+    { name: !isEdit ? 'Thêm mới khách hàng' : t('store.editInfo') },
   ];
   if (isEdit) {
     links.push({
@@ -150,15 +149,15 @@ export default function AddEditStorePage(props: AddEditStorePageProps) {
     });
   }
   return (
-    <Page title={!isEdit ? t('store.formAdd') : t('store.detailsStore')}>
+    <Page title={!isEdit ? 'Thêm mới khách hàng' : t('store.detailsStore')}>
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
-          heading={!isEdit ? t('store.formAdd') : t('store.detailsStore')}
+          heading={!isEdit ? 'Thêm mới khách hàng' : t('store.detailsStore')}
           links={links}
         />
         <Box>
           {(!isEdit || Boolean(store)) && (
-            <StoreForm
+            <CustomerForm
               initialValue={initialValues}
               onSubmit={handelStoreFormSubmit}
               isEdit={isEdit}
