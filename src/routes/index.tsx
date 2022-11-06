@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import { lazy, Suspense } from 'react';
 import { Navigate, useLocation, useRoutes } from 'react-router-dom';
 // components

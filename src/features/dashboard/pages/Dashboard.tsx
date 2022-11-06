@@ -39,29 +39,29 @@ export default function Dashboard() {
   const { themeStretch } = useSettings();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const totalStores = useAppSelector(selectStoresResponse);
-  const totalAgents = useAppSelector(selectAgentList);
-  const totalTasks = useAppSelector(selectTaskList);
-  const totalAreas = useAppSelector(selectGroupZoneList);
-  const filterReport = useAppSelector(selectFilterReport);
-  console.log(filterReport);
-  useEffect(() => {
-    dispatch(storeActions.fetchStores(initFilter));
-    dispatch(agentActions.fetchAgentList(initFilter));
-    dispatch(taskActions.fetchTaskList(initFilter));
-    dispatch(groupZoneActions.fetchGroupZoneList());
-    dispatch(orderActions.fetchOrderList(initFilter));
-    dispatch(
-      tzVersionActions.fetchTzVersionList({ ...initFilter, storeId: 0 } as TzVersionRequest)
-    );
-  }, [dispatch]);
+  // const totalStores = useAppSelector(selectStoresResponse);
+  // const totalAgents = useAppSelector(selectAgentList);
+  // const totalTasks = useAppSelector(selectTaskList);
+  // const totalAreas = useAppSelector(selectGroupZoneList);
+  // const filterReport = useAppSelector(selectFilterReport);
+  // console.log(filterReport);
+  // useEffect(() => {
+  //   dispatch(storeActions.fetchStores(initFilter));
+  //   dispatch(agentActions.fetchAgentList(initFilter));
+  //   dispatch(taskActions.fetchTaskList(initFilter));
+  //   dispatch(groupZoneActions.fetchGroupZoneList());
+  //   dispatch(orderActions.fetchOrderList(initFilter));
+  //   dispatch(
+  //     tzVersionActions.fetchTzVersionList({ ...initFilter, storeId: 0 } as TzVersionRequest)
+  //   );
+  // }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(orderActions.fetchOrderReport(filterReport));
-  }, [dispatch, filterReport]);
+  // useEffect(() => {
+  //   dispatch(orderActions.fetchOrderReport(filterReport));
+  // }, [dispatch, filterReport]);
 
   const handelFilterChange = (newFilter: FilterReport) => {
-    dispatch(orderActions.setFilterOrderReport(newFilter));
+    // dispatch(orderActions.setFilterOrderReport(newFilter));
   };
   return (
     <Page title="Dashboard: Analytics | Minimal-UI">
@@ -75,7 +75,8 @@ export default function Dashboard() {
             <CardTotalPrimary
               icon={ICONS.store}
               label={t('dashboard.totalStores')}
-              total={totalStores?.results?.length || 0}
+              // total={totalStores?.results?.length || 0}
+              total={0}
             />
           </Grid>
 
@@ -83,7 +84,8 @@ export default function Dashboard() {
             <CardTotalInfo
               icon={ICONS.groupZone}
               label={t('dashboard.totalAreas')}
-              total={totalAreas?.features?.length || 0}
+              // total={totalAreas?.features?.length || 0}
+              total={0}
             />
           </Grid>
 
@@ -91,7 +93,8 @@ export default function Dashboard() {
             <CardTotalWarning
               icon={ICONS.task}
               label={t('dashboard.totalTask')}
-              total={totalTasks?.results?.length || 0}
+              // total={totalTasks?.results?.length || 0}
+              total={0}
             />
           </Grid>
 
@@ -99,21 +102,22 @@ export default function Dashboard() {
             <CardTotalError
               icon={ICONS.agent}
               label={t('dashboard.totalAgentsActive')}
-              total={totalAgents?.results?.length || 0}
+              // total={totalAgents?.results?.length || 0}
+              total={0}
             />
           </Grid>
 
           <Grid item xs={12} md={12} lg={12}>
-            <AnalyticsOrders setFilter={handelFilterChange} />
+            {/* <AnalyticsOrders setFilter={handelFilterChange} /> */}
           </Grid>
           <Grid item xs={12} md={12} lg={12}>
-            <OrderStatus />
+            {/* <OrderStatus /> */}
           </Grid>
           <Grid item xs={12} md={5} lg={5}>
-            <CurrentActiveVersion />
+            {/* <CurrentActiveVersion /> */}
           </Grid>
           <Grid item xs={12} md={7} lg={7}>
-            <DashboardVersionMap />
+            {/* <DashboardVersionMap /> */}
           </Grid>
         </Grid>
       </Container>

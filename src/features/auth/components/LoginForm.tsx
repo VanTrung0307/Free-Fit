@@ -2,14 +2,13 @@ import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 import { Icon } from '@iconify/react';
 // material
-import { IconButton, InputAdornment, Stack, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { IconButton, InputAdornment, Stack, TextField } from '@mui/material';
 import { useAppDispatch } from 'app/hooks';
 import { Form, FormikProvider, useFormik } from 'formik';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
-import { authAction } from '../authSlice';
 //
 
 // ----------------------------------------------------------------------
@@ -23,7 +22,7 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-
+  // const navigate = useNavigate();
   const LoginSchema = Yup.object().shape({
     username: Yup.string().required(t('login.errorUsername')),
     password: Yup.string().required(t('login.errorPassword')),
@@ -42,10 +41,12 @@ export default function LoginForm() {
       //     password: values.password,
       //   })
       // );
-      // const userToken = localStorage.getItem('access_token');
-      if (values.username == fakeLogin.username && values.password == fakeLogin.password)
+
+      if (values.username == fakeLogin.username && values.password == fakeLogin.password) {
         localStorage.setItem('access_token', 'random_code');
-      window.location.reload();
+        // navigate('/dashboard');
+        window.location.href = '/dashboard';
+      }
     },
   });
 
