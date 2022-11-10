@@ -40,7 +40,7 @@ import { PATH_DASHBOARD } from 'routes/paths';
 import { fDate, fDateTimeSuffix2 } from 'utils/formatTime';
 import { selectBrandTypeOptions, selectFilter, storeActions } from '../storeSlice';
 
-export default function CustomerList() {
+export default function PTList() {
   const { themeStretch } = useSettings();
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [storeSelected, setStoreSelected] = useState<Store>();
@@ -175,6 +175,25 @@ export default function CustomerList() {
       sortable: false,
     },
     {
+      title: 'Email',
+      dataIndex: 'brandId',
+      hideInSearch: true,
+      sortable: false,
+    },
+    {
+      title: 'Trạng thái',
+      dataIndex: 'status',
+      hideInSearch: true,
+      render(value, data, index) {
+        return (
+          <Typography color={statusMap[value].color} fontWeight="bold">
+            {statusMap[value].name}
+          </Typography>
+        );
+      },
+      sortable: false,
+    },
+    {
       title: 'Ngày Tạo',
       dataIndex: 'createDate',
       hideInSearch: true,
@@ -185,7 +204,7 @@ export default function CustomerList() {
       },
     },
     {
-      title: 'Note',
+      title: 'Chi nhánh',
       dataIndex: 'address',
       hideInSearch: true,
       sortable: false,
@@ -197,20 +216,16 @@ export default function CustomerList() {
       <Page title={'Customer'}>
         <Container maxWidth={themeStretch ? false : 'lg'}>
           <HeaderBreadcrumbs
-            heading={'Khách hàng'}
-            links={[
-              { name: t('content.dashboard'), href: PATH_DASHBOARD.root },
-
-              { name: 'Khách hàng' },
-            ]}
+            heading={'PT'}
+            links={[{ name: t('content.dashboard'), href: PATH_DASHBOARD.root }, { name: 'PT' }]}
             action={
               <Button
                 variant="contained"
                 component={RouterLink}
-                to={PATH_DASHBOARD.customer.add}
+                to={PATH_DASHBOARD.pt.add}
                 startIcon={<Icon icon={plusFill} />}
               >
-                {'Thêm Khách Hàng'}
+                {'Thêm PT'}
               </Button>
             }
           />
@@ -223,7 +238,7 @@ export default function CustomerList() {
               getData={storeApi.getAllPaging}
               showAction={true}
               onDelete={handelRemoveClick}
-              onEdit={(e) => navigate(`${PATH_DASHBOARD.customer.details}/${e.id}`)}
+              onEdit={(e) => navigate(`${PATH_DASHBOARD.store.details}/${e.id}`)}
             />
           </Page>
         </Container>

@@ -40,7 +40,7 @@ import { PATH_DASHBOARD } from 'routes/paths';
 import { fDate, fDateTimeSuffix2 } from 'utils/formatTime';
 import { selectBrandTypeOptions, selectFilter, storeActions } from '../storeSlice';
 
-export default function CustomerList() {
+export default function BranchList() {
   const { themeStretch } = useSettings();
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [storeSelected, setStoreSelected] = useState<Store>();
@@ -122,70 +122,30 @@ export default function CustomerList() {
       hideInSearch: true,
       sortable: false,
     },
-    // { title: 'Họ và Tên', dataIndex: 'brandName', hideInSearch: true, sortable: false },
-    // {
-    //   title: 'Họ và Tên',
-    //   dataIndex: 'brandName',
-    //   hideInTable: true,
-    //   valueEnum: brandTypeOptions.map((item) => ({ label: item.name, value: item.id })),
-    //   render(value, data, index) {
-    //     return value;
-    //   },
-    //   renderFormItem() {
-    //     return (
-    //       <Autocomplete
-    //         value={brandName}
-    //         onChange={handleChange}
-    //         id="controllable-states-demo"
-    //         options={brandOptions}
-    //         renderInput={(params) => <TextField {...params} label="Tên thương hiệu" />}
-    //       />
-    //     );
-    //   },
-    //   sortable: false,
-    // },
+    { title: 'Tên thương hiệu', dataIndex: 'brandName', hideInSearch: true, sortable: false },
     {
-      title: 'Họ và Tên',
-      dataIndex: 'name',
-      hideInSearch: true,
-      sortable: false,
-    },
-    {
-      title: 'Họ và Tên',
-      dataIndex: 'KeySearch',
-      valueType: 'text',
+      title: 'Tên thương hiệu',
+      dataIndex: 'brandName',
       hideInTable: true,
-      hideInSearch: brandName!,
-      sortable: false,
-    },
-    {
-      title: 'Ngày Sinh',
-      dataIndex: 'createDate',
-      hideInSearch: true,
-      hideInTable: false,
-      sortable: false,
+      valueEnum: brandTypeOptions.map((item) => ({ label: item.name, value: item.id })),
       render(value, data, index) {
-        return <Box>{fDate(data?.createDate!)}</Box>;
+        return value;
       },
-    },
-    {
-      title: 'Số điện thoại',
-      dataIndex: 'phone',
-      hideInSearch: true,
+      renderFormItem() {
+        return (
+          <Autocomplete
+            value={brandName}
+            onChange={handleChange}
+            id="controllable-states-demo"
+            options={brandOptions}
+            renderInput={(params) => <TextField {...params} label="Tên thương hiệu" />}
+          />
+        );
+      },
       sortable: false,
     },
     {
-      title: 'Ngày Tạo',
-      dataIndex: 'createDate',
-      hideInSearch: true,
-      hideInTable: false,
-      sortable: false,
-      render(value, data, index) {
-        return <Box>{fDateTimeSuffix2(data?.createDate!)}</Box>;
-      },
-    },
-    {
-      title: 'Note',
+      title: 'Địa chỉ',
       dataIndex: 'address',
       hideInSearch: true,
       sortable: false,
@@ -203,16 +163,16 @@ export default function CustomerList() {
 
               { name: 'Khách hàng' },
             ]}
-            action={
-              <Button
-                variant="contained"
-                component={RouterLink}
-                to={PATH_DASHBOARD.customer.add}
-                startIcon={<Icon icon={plusFill} />}
-              >
-                {'Thêm Khách Hàng'}
-              </Button>
-            }
+            // action={
+            //   <Button
+            //     variant="contained"
+            //     component={RouterLink}
+            //     to={PATH_DASHBOARD.customer.add}
+            //     startIcon={<Icon icon={plusFill} />}
+            //   >
+            //     {'Thêm Khách Hàng'}
+            //   </Button>
+            // }
           />
 
           <Page>
@@ -223,7 +183,7 @@ export default function CustomerList() {
               getData={storeApi.getAllPaging}
               showAction={true}
               onDelete={handelRemoveClick}
-              onEdit={(e) => navigate(`${PATH_DASHBOARD.customer.details}/${e.id}`)}
+              onEdit={(e) => navigate(`${PATH_DASHBOARD.store.details}/${e.id}`)}
             />
           </Page>
         </Container>

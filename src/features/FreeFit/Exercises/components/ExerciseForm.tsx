@@ -1,5 +1,5 @@
-import { Box, Button, Card, Grid, Stack, TextField, Typography } from '@mui/material';
-import { useAppDispatch } from 'app/hooks';
+import { Autocomplete, Box, Button, Card, Grid, Stack, TextField, Typography } from '@mui/material';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import InputField from 'components/FormField/InputField';
 import { PostStore } from 'models';
 import { useForm, Controller, FormProvider, useFormState } from 'react-hook-form';
@@ -18,7 +18,9 @@ import { useNavigate, useLocation } from 'react-router';
 import { PATH_DASHBOARD } from 'routes/paths';
 import arrowCircleLeftOutline from '@iconify/icons-eva/arrow-circle-left-outline';
 import saveFill from '@iconify/icons-eva/save-fill';
-import { storeActions } from '../storeSlice';
+import { useDebouncedCallback } from 'components/common';
+import Images from 'constants/image';
+import { selectCampusesOptions, storeActions } from '../storeSlice';
 
 interface StoreFormProps {
   initialValue: PostStore;
@@ -26,7 +28,7 @@ interface StoreFormProps {
   isEdit: boolean;
   isView?: boolean;
 }
-export default function CustomerForm({ initialValue, onSubmit, isEdit, isView }: StoreFormProps) {
+export default function ExerciseForm({ initialValue, onSubmit, isEdit, isView }: StoreFormProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -44,6 +46,23 @@ export default function CustomerForm({ initialValue, onSubmit, isEdit, isView }:
     dispatch(storeActions.fetchBuildingByCampus(campusId));
   }, [dispatch, provinceId, districtId, wardId, campusId]);
 
+  const [address, setAddress] = useState(['']);
+  const [imgLink, setImglink] = useState<string>(initialValue.imageUrl || Images.DEFAULT_IMG);
+  const campusesOptions = useAppSelector(selectCampusesOptions);
+  const campusOptions = campusesOptions.map((c) => ({ label: c.name, value: c.id }));
+  const handelInputFieldImgChange = useDebouncedCallback((e) => {
+    setImglink(e.target.value);
+  }, 500);
+
+  const handelInputFieldAddress = useDebouncedCallback((value) => {
+    // setAddress((prevState) => `${value}, ${prevState}`);
+    const addAddress = [...address];
+    addAddress.unshift(value);
+    setAddress(addAddress);
+    if (!isEdit) {
+      setValue('address', addAddress.join(', '));
+    }
+  }, 500);
   // schema
   const schema = yup.object().shape({
     name: yup.string().required(t('store.errorStoreName')),
@@ -80,6 +99,11 @@ export default function CustomerForm({ initialValue, onSubmit, isEdit, isView }:
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
   const [day, setDay] = React.useState<Dayjs | null>(null);
+
+  const handelSelectCampus = (id) => {
+    setCampusId(id);
+  };
+
   return (
     <FormProvider {...formMethod}>
       <form onSubmit={handleSubmit(handelFormSubmit)}>
@@ -88,7 +112,7 @@ export default function CustomerForm({ initialValue, onSubmit, isEdit, isView }:
             <Stack spacing={2}>
               <Card sx={{ p: 2 }}>
                 <Typography variant="h6" gutterBottom marginBottom={2}>
-                  {'Thông tin khách hàng'}
+                  {'Thông tin PT'}
                 </Typography>
                 <Stack spacing={2}>
                   <Stack spacing={2}>
@@ -161,11 +185,47 @@ export default function CustomerForm({ initialValue, onSubmit, isEdit, isView }:
                     control={control}
                     disabled={isView}
                   />
+                  {/* <InputField
+                    name="adress"
+                    label={`${'Chi nhánh'}`}
+                    control={control}
+                    disabled={isView}
+                  /> */}
+                  <Autocomplete
+                    disablePortal
+                    id="status"
+                    options={campusOptions}
+                    renderInput={(params) => <TextField {...params} label="Trạng thái" />}
+                    onChange={(event, newValue: any) => {
+                      handelSelectCampus(newValue?.value);
+                      handelInputFieldAddress(newValue?.label);
+                    }}
+                  />
+                  <Autocomplete
+                    disablePortal
+                    id="campusId"
+                    options={campusOptions}
+                    renderInput={(params) => <TextField {...params} label="Chọn phòng" />}
+                    onChange={(event, newValue: any) => {
+                      handelSelectCampus(newValue?.value);
+                      handelInputFieldAddress(newValue?.label);
+                    }}
+                  />
+                  <Autocomplete
+                    disablePortal
+                    id="campusId"
+                    options={campusOptions}
+                    renderInput={(params) => <TextField {...params} label="Chọn thời gian" />}
+                    onChange={(event, newValue: any) => {
+                      handelSelectCampus(newValue?.value);
+                      handelInputFieldAddress(newValue?.label);
+                    }}
+                  />
                 </Stack>
               </Card>
             </Stack>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6} sx={{ paddingRight: '350px' }}>
             {isView ? (
               <></>
             ) : (
@@ -183,7 +243,7 @@ export default function CustomerForm({ initialValue, onSubmit, isEdit, isView }:
                   variant="contained"
                   color="secondary"
                   onClick={() => {
-                    navigate(`${PATH_DASHBOARD.customer.root}`);
+                    navigate(`${PATH_DASHBOARD.pt.root}`);
                   }}
                   size="medium"
                   startIcon={<Icon icon={arrowCircleLeftOutline} />}

@@ -166,16 +166,16 @@ export default function ClubList() {
       },
       sortable: false,
     },
-    {
-      title: 'Ngày Sinh',
-      dataIndex: 'createDate',
-      hideInSearch: true,
-      hideInTable: false,
-      sortable: false,
-      render(value, data, index) {
-        return <Box>{fDate(data?.createDate!)}</Box>;
-      },
-    },
+    // {
+    //   title: 'Ngày Sinh',
+    //   dataIndex: 'createDate',
+    //   hideInSearch: true,
+    //   hideInTable: false,
+    //   sortable: false,
+    //   render(value, data, index) {
+    //     return <Box>{fDate(data?.createDate!)}</Box>;
+    //   },
+    // },
     {
       title: 'Số điện thoại',
       dataIndex: 'phone',
@@ -193,7 +193,7 @@ export default function ClubList() {
       },
     },
     {
-      title: 'Note',
+      title: 'Địa chỉ',
       dataIndex: 'address',
       hideInSearch: true,
       sortable: false,
@@ -214,7 +214,7 @@ export default function ClubList() {
               <Button
                 variant="contained"
                 component={RouterLink}
-                to={PATH_DASHBOARD.store.add}
+                to={PATH_DASHBOARD.club.add}
                 startIcon={<Icon icon={plusFill} />}
               >
                 {'Thêm Phòng Tập'}

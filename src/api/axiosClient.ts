@@ -6,7 +6,7 @@ import i18n from 'translation/i18n';
 // Set up default config for http requests here
 
 const axiosClient = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'https://api.tradezonemap.com/api/v1.0',
+  baseURL: process.env.REACT_APP_API_URL || 'https://freefit.azurewebsites.net/api/v1.0',
   headers: {
     'content-type': 'multipart/form-data',
   },
@@ -22,7 +22,7 @@ axiosClient.interceptors.request.use(async (config: AxiosRequestConfig) => {
   const jwt = localStorage.getItem('access_token');
   if (jwt) {
     const exp = Number(localStorage.getItem('time_expire'));
-    if (exp < Date.now() / 1000) {
+    if (exp > Date.now() / 1000) {
       localStorage.removeItem('access_token');
       localStorage.removeItem('user');
       localStorage.removeItem('time_expire');

@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import { PATH_DASHBOARD } from 'routes/paths';
 import { getCurrentUser } from 'utils/common';
-import ClubForm from '../components/ClubForm';
+import CustomerForm from '../components/PTForm';
 import { selectBuilding, storeActions } from '../storeSlice';
 import './style.css';
 
@@ -27,7 +27,7 @@ interface AddEditStorePageProps {}
 //   borderRadius: theme.shape.borderRadiusSm,
 // }));
 
-export default function AddEditCPage(props: AddEditStorePageProps) {
+export default function AddEditPTPage(props: AddEditStorePageProps) {
   const { storeId } = useParams();
   const isEdit = Boolean(storeId);
   const dispatch = useAppDispatch();
@@ -139,8 +139,8 @@ export default function AddEditCPage(props: AddEditStorePageProps) {
 
   const links = [
     { name: 'Dashboard', href: PATH_DASHBOARD.root },
-    { name: 'Quản lí Phòng tập', href: PATH_DASHBOARD.club.root },
-    { name: !isEdit ? 'Thêm mới Phòng tập' : t('store.editInfo') },
+    { name: 'Quản lí PT', href: PATH_DASHBOARD.pt.root },
+    { name: !isEdit ? 'Thêm mới PT' : t('store.editInfo') },
   ];
   if (isEdit) {
     links.push({
@@ -149,15 +149,15 @@ export default function AddEditCPage(props: AddEditStorePageProps) {
     });
   }
   return (
-    <Page title={!isEdit ? 'Thêm mới Phòng tập' : t('store.detailsStore')}>
+    <Page title={!isEdit ? 'Thêm mới PT' : t('store.detailsStore')}>
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
-          heading={!isEdit ? 'Thêm mới Phòng tập' : t('store.detailsStore')}
+          heading={!isEdit ? 'Thêm mới PT' : t('store.detailsStore')}
           links={links}
         />
         <Box>
           {(!isEdit || Boolean(store)) && (
-            <ClubForm
+            <CustomerForm
               initialValue={initialValues}
               onSubmit={handelStoreFormSubmit}
               isEdit={isEdit}

@@ -55,9 +55,9 @@ export default function Login() {
       <MHidden width="mdDown">
         <SectionStyle>
           <Typography variant="h3" sx={{ px: 5, mt: 10 }}>
-            {t('login.welcome')}
+            {'Chào mừng đến với hệ thống FreeFit'}
           </Typography>
-          <img src="/static/home/login.svg" alt="login" />
+          <img src="/static/login-poster.png" alt="login" />
         </SectionStyle>
       </MHidden>
 

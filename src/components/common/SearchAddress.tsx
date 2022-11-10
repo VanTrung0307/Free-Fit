@@ -37,7 +37,7 @@ export function SearchAddress({ onChangeAddress }: SearchAddressProps) {
     (async () => {
       const response = await fetch(
         `${
-          process.env.REACT_APP_API_URL || 'https://stg-api.tradezonemap.com/api/v1.0'
+          process.env.REACT_APP_API_URL || 'https://freefit.azurewebsites.net/api/v1.0'
         }/address/osm-nominatim-elastic?KeySearch=${keySearch}&IsSearchForBrand=false`
       ); // For demo purposes.
       const countries = await response.json();

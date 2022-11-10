@@ -1,37 +1,35 @@
-import { Box, Button, Card, Grid, Stack, Typography, Autocomplete, TextField } from '@mui/material';
-import { AutoCompleteField } from 'components/form';
-import { LoadingButton } from '@mui/lab';
-import { useAppSelector, useAppDispatch } from 'app/hooks';
-import InputField from 'components/FormField/InputField';
-import SelectField from 'components/FormField/SelectField';
-import { Address, PostStore } from 'models';
-import { useForm, useFormState, Controller, FormProvider } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { useEffect, useState } from 'react';
-import { LatLngExpression } from 'leaflet';
-import { MapDraggable, SearchAddress, useDebouncedCallback } from 'components/common';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import InputAreaField from 'components/FormField/InputAreaField';
 import arrowCircleLeftOutline from '@iconify/icons-eva/arrow-circle-left-outline';
 import saveFill from '@iconify/icons-eva/save-fill';
 import { Icon } from '@iconify/react';
-import { PATH_DASHBOARD } from 'routes/paths';
-import { useNavigate, useLocation } from 'react-router';
-import { styled } from '@mui/material/styles';
+import { DatePicker, LoadingButton, LocalizationProvider } from '@mui/lab';
+import { Autocomplete, Box, Button, Card, Grid, Stack, TextField, Typography } from '@mui/material';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { useDebouncedCallback } from 'components/common';
+import { AutoCompleteField } from 'components/form';
+import InputField from 'components/FormField/InputField';
+import SelectField from 'components/FormField/SelectField';
 import Images from 'constants/image';
-import { IconMyStore } from 'components/map/MarkerStyles';
-import ImageForm from 'components/ImageForm';
+import { LatLngExpression } from 'leaflet';
+import { PostStore } from 'models';
+import { useEffect, useState } from 'react';
+import * as React from 'react';
+import { FormProvider, useForm, useFormState } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router';
+import { PATH_DASHBOARD } from 'routes/paths';
+import { Dayjs } from 'dayjs';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import * as yup from 'yup';
 import {
-  selectStoreTypeOptions,
   selectBrandTypeOptions,
-  storeActions,
-  selectProvincesOptions,
-  selectDistrictsOptions,
-  selectWardsOptions,
-  selectCampusesOptions,
   selectBuildingsOptions,
-  selectBuilding,
+  selectCampusesOptions,
+  selectDistrictsOptions,
+  selectProvincesOptions,
+  selectStoreTypeOptions,
+  selectWardsOptions,
+  storeActions,
 } from '../storeSlice';
 
 interface StoreFormProps {
@@ -40,18 +38,10 @@ interface StoreFormProps {
   isEdit: boolean;
   isView?: boolean;
 }
-const ThumbImgStyle = styled('img')(({ theme }) => ({
-  width: 300,
-  height: 300,
-  objectFit: 'cover',
-  margin: theme.spacing(0, 2),
-  borderRadius: theme.shape.borderRadiusSm,
-}));
-export default function StoreForm({ initialValue, onSubmit, isEdit, isView }: StoreFormProps) {
+export default function ClubForm({ initialValue, onSubmit, isEdit, isView }: StoreFormProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const locations = useLocation();
 
   const [imgLink, setImglink] = useState<string>(initialValue.imageUrl || Images.DEFAULT_IMG);
   const [address, setAddress] = useState(['']);
@@ -123,17 +113,6 @@ export default function StoreForm({ initialValue, onSubmit, isEdit, isView }: St
     return option;
   };
 
-  const allBuildingsOptions = useAppSelector(selectBuilding);
-  // const allBuildingOptions = new {
-  //   label: allBuildingsOptions.name,
-  //   id: allBuildingsOptions.id,
-  // }();
-  // const getAllBuildingObj = (option: any) => {
-  //   if (!option) return option;
-  //   if (!option.value) return allBuildingOptions.find((opt) => opt.value === option);
-  //   return option;
-  // };
-
   const handelFormSubmit = (formValues: PostStore) => {
     if (onSubmit) onSubmit(formValues);
   };
@@ -158,14 +137,6 @@ export default function StoreForm({ initialValue, onSubmit, isEdit, isView }: St
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
-  const handelSelectLocation = (address: Address) => {
-    setLocation(address?.latlng);
-  };
-  const handelOnDragMarker = (point: any) => {
-    // setLocationSelected(point['lng'].toString() + ' ' + point['lat'].toString());
-    const latLng: LatLngExpression = [point.lat, point.lng];
-    setLocation(latLng);
-  };
 
   const handelSelectProvince = (id) => {
     setProvinceId(id);
@@ -179,6 +150,7 @@ export default function StoreForm({ initialValue, onSubmit, isEdit, isView }: St
   const handelSelectCampus = (id) => {
     setCampusId(id);
   };
+  const [day, setDay] = React.useState<Dayjs | null>(null);
   return (
     <FormProvider {...formMethod}>
       <form onSubmit={handleSubmit(handelFormSubmit)}>
@@ -187,10 +159,10 @@ export default function StoreForm({ initialValue, onSubmit, isEdit, isView }: St
             <Stack spacing={2}>
               <Card sx={{ p: 2 }}>
                 <Typography variant="h6" gutterBottom marginBottom={2}>
-                  {t('store.info')}
+                  {'Thông tin Phòng tập'}
                 </Typography>
                 <Stack spacing={2}>
-                  <Stack spacing={2}>
+                  {/* <Stack spacing={2}>
                     <Box
                       style={{
                         display: 'flex',
@@ -213,16 +185,16 @@ export default function StoreForm({ initialValue, onSubmit, isEdit, isView }: St
                         )}
                       />
                     </Box>
-                  </Stack>
-                  <InputField
+                  </Stack> */}
+                  {/* <InputField
                     name="storeCode"
                     label={`${t('store.storeCode')}*`}
                     control={control}
                     disabled={isView}
-                  />
+                  /> */}
                   <InputField
                     name="name"
-                    label={`${t('store.storeName')}*`}
+                    label={`${'Tên Phòng Tập'}*`}
                     control={control}
                     disabled={isView}
                   />
@@ -232,129 +204,28 @@ export default function StoreForm({ initialValue, onSubmit, isEdit, isView }: St
                     control={control}
                     disabled={isView}
                   />
-                  <InputField
-                    name="bank"
-                    label={`${t('store.bank')}`}
-                    control={control}
-                    disabled={isView}
-                  />
-                  <Box mt={2}>
-                    <SelectField
-                      name="storeTypeId"
-                      label={`${t('store.storeTypeName')}*`}
-                      control={control}
-                      options={storeTypeOptions}
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      label="Ngày Đăng Kí"
                       disabled={isView}
+                      value={day}
+                      onChange={(newValue) => {
+                        setDay(newValue);
+                      }}
+                      renderInput={(params) => <TextField {...params} />}
                     />
-                  </Box>
-                  <AutoCompleteField
-                    options={brandOptions}
-                    getOptionLabel={(value: any) => getBrandObj(value)?.label || ''}
-                    isOptionEqualToValue={(option: any, value: any) => {
-                      if (!option) return option;
-                      return option.value === getBrandObj(value)?.value;
-                    }}
-                    transformValue={(opt: any) => opt?.value}
-                    size="small"
-                    type="text"
-                    label={'Chọn thương hiệu'}
-                    name={'brandId'}
-                    fullWidth
-                  />
+                  </LocalizationProvider>
                   <InputField
-                    name="imageUrl"
-                    label={`${t('store.img')}*`}
+                    name="address"
+                    label={'Địa chỉ'}
                     control={control}
-                    onChange={handelInputFieldImgChange}
                     disabled={isView}
-                  />
-                  <Autocomplete
-                    disablePortal
-                    id="provinceId"
-                    options={provinceOptions}
-                    renderInput={(params) => <TextField {...params} label="Chọn tỉnh" />}
-                    onChange={(event, newValue: any) => {
-                      handelSelectProvince(newValue?.value);
-                      handelInputFieldAddress(newValue?.label);
-                    }}
-                  />
-                  <Autocomplete
-                    disablePortal
-                    id="districtId"
-                    options={districtOptions}
-                    renderInput={(params) => <TextField {...params} label="Chọn quận" />}
-                    onChange={(event, newValue: any) => {
-                      handelSelectDistrict(newValue?.value);
-                      handelInputFieldAddress(newValue?.label);
-                    }}
-                  />
-                  <Autocomplete
-                    disablePortal
-                    id="wardId"
-                    options={wardOptions}
-                    renderInput={(params) => <TextField {...params} label="Chọn phường" />}
-                    onChange={(event, newValue: any) => {
-                      handelSelectWard(newValue?.value);
-                      handelInputFieldAddress(newValue?.label);
-                    }}
-                  />
-                  <Autocomplete
-                    disablePortal
-                    id="campusId"
-                    options={campusOptions}
-                    renderInput={(params) => <TextField {...params} label="Chọn khu vực" />}
-                    onChange={(event, newValue: any) => {
-                      handelSelectCampus(newValue?.value);
-                      handelInputFieldAddress(newValue?.label);
-                    }}
-                  />
-                  <AutoCompleteField
-                    options={buildingOptions}
-                    getOptionLabel={(value: any) => getBuildingObj(value)?.label || ''}
-                    isOptionEqualToValue={(option: any, value: any) => {
-                      if (!option) return option;
-                      return option.value === getBuildingObj(value)?.value;
-                    }}
-                    transformValue={(opt: any) => opt?.value}
-                    size="small"
-                    type="text"
-                    label={'Chọn địa điểm'}
-                    name={'buildingId'}
-                    onUpdate={(newValue) => handelInputFieldAddress(newValue?.label)}
-                    fullWidth
                   />
                 </Stack>
               </Card>
             </Stack>
           </Grid>
-          <Grid item xs={12} md={6}>
-            <Card sx={{ p: 2 }}>
-              <Typography variant="h6" gutterBottom marginBottom={2}>
-                {t('store.addressMap')}
-              </Typography>
-              <Stack spacing={2}>
-                <SearchAddress onChangeAddress={handelSelectLocation} />
-
-                <MapDraggable
-                  location={location}
-                  onDraggable={handelOnDragMarker}
-                  icon={IconMyStore}
-                />
-
-                <InputField
-                  name="coordinateString"
-                  label={`${t('store.location')}*`}
-                  control={control}
-                  disabled
-                />
-                <InputAreaField
-                  name="address"
-                  label={`${t('store.address')}*`}
-                  control={control}
-                  disabled={isView}
-                />
-              </Stack>
-            </Card>
+          <Grid item xs={12} md={6} sx={{ paddingRight: '350px' }}>
             {isView ? (
               <></>
             ) : (
@@ -372,7 +243,7 @@ export default function StoreForm({ initialValue, onSubmit, isEdit, isView }: St
                   variant="contained"
                   color="secondary"
                   onClick={() => {
-                    navigate(`${PATH_DASHBOARD.store.root}`);
+                    navigate(`${PATH_DASHBOARD.club.root}`);
                   }}
                   size="medium"
                   startIcon={<Icon icon={arrowCircleLeftOutline} />}

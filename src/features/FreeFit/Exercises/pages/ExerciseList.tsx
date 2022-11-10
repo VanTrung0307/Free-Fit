@@ -33,14 +33,13 @@ import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // redux
 // routes
-import { Visibility } from '@mui/icons-material';
 import ResoTable from 'components/table/ResoTable';
 import { TTableColumn } from 'components/table/table';
 import { PATH_DASHBOARD } from 'routes/paths';
-import { fDate, fDateTimeSuffix2 } from 'utils/formatTime';
+import exerciseApi from 'api/exerciseApi';
 import { selectBrandTypeOptions, selectFilter, storeActions } from '../storeSlice';
 
-export default function CustomerList() {
+export default function ExerciseList() {
   const { themeStretch } = useSettings();
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [storeSelected, setStoreSelected] = useState<Store>();
@@ -65,7 +64,7 @@ export default function CustomerList() {
   };
   const handelConfirmRemoveClick = async () => {
     try {
-      await storeApi.remove(storeSelected?.id || 0);
+      await exerciseApi.remove(storeSelected?.id || 0);
       const newFilter = { ...filter };
       dispatch(storeActions.setFilter(newFilter));
       enqueueSnackbar(`${storeSelected?.name} ${t('store.deleteSuccess')}`, { variant: 'success' });
@@ -79,151 +78,95 @@ export default function CustomerList() {
 
   const brandOptions = brandTypeOptions.map((c) => ({ label: c.name, value: c.id }));
 
-  const [brandName, setBrandName] = useState<any>(null);
+  const [categoryName, setCategoryName] = useState<any>(null);
   const handleChange = (event: any, newValue: any) => {
-    setBrandName(newValue);
+    setCategoryName(newValue);
   };
 
   useEffect(() => {
-    if (brandName === null) {
-      ref.current.formControl.setValue('SearchBy', '');
-      ref.current.formControl.setValue('KeySearch', '');
+    if (categoryName === null) {
+      ref.current.formControl.setValue('categoryName', '');
+      ref.current.formControl.setValue('categoryName', '');
     }
-    if (ref.current && brandName) {
-      ref.current.formControl.setValue('SearchBy', 'Brand');
-      ref.current.formControl.setValue('KeySearch', brandName.value);
+    if (ref.current && categoryName) {
+      ref.current.formControl.setValue('categoryName', 'categoryName');
+      ref.current.formControl.setValue('categoryName', categoryName.value);
     }
-  }, [brandName]);
+  }, [categoryName]);
 
-  type TStoreBase = {
-    address?: string;
-    brandId?: number;
-    brandName?: string;
-    building?: { id?: any; isEditable?: boolean; name?: string };
-    buildingId?: number;
-    createDate?: string;
+  type TExerciseBase = {
     id?: number;
-    imageUrl?: string;
-    name?: string;
-    status?: number;
-    storeCode?: string;
-    storeTypeId?: number;
-    storeTypeName?: string;
-    type?: string;
-    SearchBy?: string;
-    KeySearch?: string;
-    phone?: string;
-    bank?: string;
+    image?: string;
+    description?: string;
+    categoryId?: number;
+    categoryName?: string;
   };
-  const storeColumn: TTableColumn<TStoreBase>[] = [
+  const exerciseColumn: TTableColumn<TExerciseBase>[] = [
     {
       title: 'STT',
       dataIndex: 'index',
       hideInSearch: true,
       sortable: false,
     },
-    // { title: 'Họ và Tên', dataIndex: 'brandName', hideInSearch: true, sortable: false },
-    // {
-    //   title: 'Họ và Tên',
-    //   dataIndex: 'brandName',
-    //   hideInTable: true,
-    //   valueEnum: brandTypeOptions.map((item) => ({ label: item.name, value: item.id })),
-    //   render(value, data, index) {
-    //     return value;
-    //   },
-    //   renderFormItem() {
-    //     return (
-    //       <Autocomplete
-    //         value={brandName}
-    //         onChange={handleChange}
-    //         id="controllable-states-demo"
-    //         options={brandOptions}
-    //         renderInput={(params) => <TextField {...params} label="Tên thương hiệu" />}
-    //       />
-    //     );
-    //   },
-    //   sortable: false,
-    // },
     {
-      title: 'Họ và Tên',
-      dataIndex: 'name',
+      title: 'Mô tả',
+      dataIndex: 'description',
       hideInSearch: true,
       sortable: false,
     },
     {
-      title: 'Họ và Tên',
-      dataIndex: 'KeySearch',
+      title: 'Mã mức độ',
+      dataIndex: 'categoryId',
+      hideInSearch: true,
+      sortable: false,
+    },
+    {
+      title: 'Mức độ',
+      dataIndex: 'categoryName',
+      hideInSearch: true,
+      sortable: false,
+    },
+    {
+      title: 'Mức độ',
+      dataIndex: 'categoryName',
       valueType: 'text',
       hideInTable: true,
-      hideInSearch: brandName!,
-      sortable: false,
-    },
-    {
-      title: 'Ngày Sinh',
-      dataIndex: 'createDate',
-      hideInSearch: true,
-      hideInTable: false,
-      sortable: false,
-      render(value, data, index) {
-        return <Box>{fDate(data?.createDate!)}</Box>;
-      },
-    },
-    {
-      title: 'Số điện thoại',
-      dataIndex: 'phone',
-      hideInSearch: true,
-      sortable: false,
-    },
-    {
-      title: 'Ngày Tạo',
-      dataIndex: 'createDate',
-      hideInSearch: true,
-      hideInTable: false,
-      sortable: false,
-      render(value, data, index) {
-        return <Box>{fDateTimeSuffix2(data?.createDate!)}</Box>;
-      },
-    },
-    {
-      title: 'Note',
-      dataIndex: 'address',
-      hideInSearch: true,
+      hideInSearch: categoryName!,
       sortable: false,
     },
   ];
 
   return (
     <FormProvider {...formMethod}>
-      <Page title={'Customer'}>
+      <Page title={'Exercise'}>
         <Container maxWidth={themeStretch ? false : 'lg'}>
           <HeaderBreadcrumbs
-            heading={'Khách hàng'}
+            heading={'Exercise'}
             links={[
               { name: t('content.dashboard'), href: PATH_DASHBOARD.root },
-
-              { name: 'Khách hàng' },
+              { name: 'Exercise' },
             ]}
             action={
               <Button
                 variant="contained"
                 component={RouterLink}
-                to={PATH_DASHBOARD.customer.add}
+                to={PATH_DASHBOARD.exercise.add}
                 startIcon={<Icon icon={plusFill} />}
               >
-                {'Thêm Khách Hàng'}
+                {'Thêm PT'}
               </Button>
             }
           />
 
           <Page>
             <ResoTable
-              key={'store-id'}
+              key={'categoryId'}
               ref={ref}
-              columns={storeColumn}
-              getData={storeApi.getAllPaging}
+              columns={exerciseColumn}
+              getData={exerciseApi.getAll}
               showAction={true}
               onDelete={handelRemoveClick}
-              onEdit={(e) => navigate(`${PATH_DASHBOARD.customer.details}/${e.id}`)}
+              onEdit={(e) => navigate(`${PATH_DASHBOARD.store.details}/${e.id}`)}
             />
           </Page>
         </Container>

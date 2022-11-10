@@ -26,7 +26,7 @@ interface StoreFormProps {
   isEdit: boolean;
   isView?: boolean;
 }
-export default function CustomerForm({ initialValue, onSubmit, isEdit, isView }: StoreFormProps) {
+export default function BranchForm({ initialValue, onSubmit, isEdit, isView }: StoreFormProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -165,7 +165,7 @@ export default function CustomerForm({ initialValue, onSubmit, isEdit, isView }:
               </Card>
             </Stack>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6} sx={{ paddingRight: '350px' }}>
             {isView ? (
               <></>
             ) : (

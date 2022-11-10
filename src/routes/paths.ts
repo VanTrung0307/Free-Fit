@@ -44,9 +44,25 @@ export const PATH_DASHBOARD = {
   customer: {
     root: path(ROOTS_DASHBOARD, '/manage-customer'),
     add: path(ROOTS_DASHBOARD, '/manage-customer/add'),
+    details: path(ROOTS_DASHBOARD, '/manage-customer/details'),
+    editInfo: path(ROOTS_DASHBOARD, '/manage-customer/details/edit-info'),
   },
   club: {
     root: path(ROOTS_DASHBOARD, '/manage-club'),
+    add: path(ROOTS_DASHBOARD, '/manage-club/add'),
+  },
+  pt: {
+    root: path(ROOTS_DASHBOARD, '/manage-pt'),
+    add: path(ROOTS_DASHBOARD, '/manage-pt/add'),
+  },
+  branch: {
+    root: path(ROOTS_DASHBOARD, '/manage-branch'),
+    // add: path(ROOTS_DASHBOARD, '/manage-branch/add'),
+  },
+  exercise: {
+    root: path(ROOTS_DASHBOARD, '/manage-exercise'),
+    add: path(ROOTS_DASHBOARD, '/manage-exercise/add'),
+    details: path(ROOTS_DASHBOARD, '/manage-exercise/details'),
   },
   storeType: {
     root: path(ROOTS_DASHBOARD, '/manage-storetype'),

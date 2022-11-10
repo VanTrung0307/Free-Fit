@@ -65,6 +65,20 @@ export default function Router() {
           children: [
             { path: '/', element: <CustomerList /> },
             { path: 'add', element: <AddEditCustomerPage /> },
+            { path: 'details/:storeId', element: <CustomerViewPage /> },
+            { path: 'details/edit-info/:storeId', element: <AddEditCustomerPage /> },
+            { path: 'details/edit-attrs/:storeId/:storeTypeId', element: <EditAttrsPage /> },
+            {
+              path: 'details/edit-templates/:storeId/:isStoreView',
+              element: <StoreTemplatePage />,
+            },
+          ],
+        },
+        {
+          path: 'manage-branch',
+          children: [
+            { path: '/', element: <BranchList /> },
+            // { path: 'add', element: <AddEditCustomerPage /> },
             { path: 'details/:storeId', element: <StoreViewPage /> },
             { path: 'details/edit-info/:storeId', element: <AddEditCustomerPage /> },
             { path: 'details/edit-attrs/:storeId/:storeTypeId', element: <EditAttrsPage /> },
@@ -78,9 +92,37 @@ export default function Router() {
           path: 'manage-club',
           children: [
             { path: '/', element: <ClubList /> },
-            { path: 'add', element: <AddEditStorePage /> },
+            { path: 'add', element: <AddEditClubPage /> },
             { path: 'details/:storeId', element: <StoreViewPage /> },
             { path: 'details/edit-info/:storeId', element: <AddEditStorePage /> },
+            { path: 'details/edit-attrs/:storeId/:storeTypeId', element: <EditAttrsPage /> },
+            {
+              path: 'details/edit-templates/:storeId/:isStoreView',
+              element: <StoreTemplatePage />,
+            },
+          ],
+        },
+        {
+          path: 'manage-pt',
+          children: [
+            { path: '/', element: <PTList /> },
+            { path: 'add', element: <AddEditPTPage /> },
+            { path: 'details/:storeId', element: <StoreViewPage /> },
+            { path: 'details/edit-info/:storeId', element: <AddEditStorePage /> },
+            { path: 'details/edit-attrs/:storeId/:storeTypeId', element: <EditAttrsPage /> },
+            {
+              path: 'details/edit-templates/:storeId/:isStoreView',
+              element: <StoreTemplatePage />,
+            },
+          ],
+        },
+        {
+          path: 'manage-exercise',
+          children: [
+            { path: '/', element: <ExerciseList /> },
+            { path: 'add', element: <AddEditExercisePage /> },
+            { path: 'details/:exerciseId', element: <StoreViewPage /> },
+            { path: 'details/edit-info/:storeId', element: <AddEditExercisePage /> },
             { path: 'details/edit-attrs/:storeId/:storeTypeId', element: <EditAttrsPage /> },
             {
               path: 'details/edit-templates/:storeId/:isStoreView',
@@ -359,4 +401,17 @@ const CustomerList = Loadable(lazy(() => import('features/FreeFit/customer/pages
 const AddEditCustomerPage = Loadable(
   lazy(() => import('features/FreeFit/customer/pages/AddEditCustomerPage'))
 );
+const CustomerViewPage = Loadable(
+  lazy(() => import('features/FreeFit/customer/pages/CustomerViewPage'))
+);
 const ClubList = Loadable(lazy(() => import('features/FreeFit/club/pages/ClubList')));
+const AddEditClubPage = Loadable(lazy(() => import('features/FreeFit/club/pages/AddEditClubPage')));
+const PTList = Loadable(lazy(() => import('features/FreeFit/Trainer_PT/pages/PTList')));
+const AddEditPTPage = Loadable(
+  lazy(() => import('features/FreeFit/Trainer_PT/pages/AddEditPTPage'))
+);
+const BranchList = Loadable(lazy(() => import('features/FreeFit/Branch/pages/BranchList')));
+const ExerciseList = Loadable(lazy(() => import('features/FreeFit/Exercises/pages/ExerciseList')));
+const AddEditExercisePage = Loadable(
+  lazy(() => import('features/FreeFit/Exercises/pages/AddEditExercisePage'))
+);

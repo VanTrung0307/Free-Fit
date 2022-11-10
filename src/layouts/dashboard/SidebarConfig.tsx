@@ -47,25 +47,25 @@ export default function SidebarConfig() {
           path: PATH_DASHBOARD.analytics,
           icon: ICONS.dashboard,
         },
-        {
-          title: 'Báo cáo',
-          path: PATH_DASHBOARD.overviewDate,
-          icon: ICONS.calendar,
-        },
-        {
-          title: t('content.asset'),
-          path: PATH_DASHBOARD.asset.root,
-          icon: ICONS.asset,
-          children: [
-            { title: t('asset.list'), path: PATH_DASHBOARD.asset.assets },
-            { title: t('asset.violationLogs'), path: PATH_DASHBOARD.asset.violations },
-          ],
-        },
-        {
-          title: 'Cửa hàng',
-          path: PATH_DASHBOARD.store.root,
-          icon: ICONS.store,
-        },
+        // {
+        //   title: 'Báo cáo',
+        //   path: PATH_DASHBOARD.overviewDate,
+        //   icon: ICONS.calendar,
+        // },
+        // {
+        //   title: t('content.asset'),
+        //   path: PATH_DASHBOARD.asset.root,
+        //   icon: ICONS.asset,
+        //   children: [
+        //     { title: t('asset.list'), path: PATH_DASHBOARD.asset.assets },
+        //     { title: t('asset.violationLogs'), path: PATH_DASHBOARD.asset.violations },
+        //   ],
+        // },
+        // {
+        //   title: 'Cửa hàng',
+        //   path: PATH_DASHBOARD.store.root,
+        //   icon: ICONS.store,
+        // },
         {
           title: 'Customer',
           path: PATH_DASHBOARD.customer.root,
@@ -74,41 +74,57 @@ export default function SidebarConfig() {
         {
           title: 'Club',
           path: PATH_DASHBOARD.club.root,
-          icon: ICONS.team,
+          icon: ICONS.groupZone,
+        },
+        {
+          title: 'Trainer & PT',
+          path: PATH_DASHBOARD.pt.root,
+          icon: ICONS.agent,
+        },
+        {
+          title: 'Branch',
+          path: PATH_DASHBOARD.branch.root,
+          icon: ICONS.poiBrand,
+        },
+        {
+          title: 'Exercise',
+          path: PATH_DASHBOARD.exercise.root,
+          icon: ICONS.poiBrand,
         },
       ],
     },
+    // {
+    //   subheader: t('common.delivery'),
+    //   items: [
+    //     {
+    //       title: t('common.order'),
+    //       path: PATH_DASHBOARD.order.root,
+    //       icon: ICONS.order,
+    //     },
+    //     {
+    //       title: t('common.task'),
+    //       path: PATH_DASHBOARD.task.root,
+    //       icon: ICONS.task,
+    //     },
+    //     {
+    //       title: t('common.tracking'),
+    //       path: PATH_DASHBOARD.tracking.root,
+    //       icon: ICONS.tracking,
+    //     },
+    //     {
+    //       title: t('common.agent'),
+    //       path: PATH_DASHBOARD.agent.root,
+    //       icon: ICONS.agent,
+    //     },
+    //   ],
+    // },
     {
-      subheader: t('common.delivery'),
+      subheader: t('THỜI GIAN BIỂU'),
       items: [
+        // { title: t('content.map'), path: PATH_DASHBOARD.general.brandMap, icon: ICONS.map },
         {
-          title: t('common.order'),
-          path: PATH_DASHBOARD.order.root,
-          icon: ICONS.order,
-        },
-        {
-          title: t('common.task'),
-          path: PATH_DASHBOARD.task.root,
-          icon: ICONS.task,
-        },
-        {
-          title: t('common.tracking'),
-          path: PATH_DASHBOARD.tracking.root,
-          icon: ICONS.tracking,
-        },
-        // {
-        //   title: t('common.agent'),
-        //   path: PATH_DASHBOARD.agent.root,
-        //   icon: ICONS.agent,
-        // },
-      ],
-    },
-    {
-      subheader: t('common.businessArea'),
-      items: [
-        { title: t('content.map'), path: PATH_DASHBOARD.general.brandMap, icon: ICONS.map },
-        {
-          title: t('tz.calendar'),
+          // title: t('tz.calendar'),
+          title: 'Lịch tập',
           path: PATH_DASHBOARD.tradeZone.tradeZoneCalendar,
           icon: ICONS.tradeZone,
         },
