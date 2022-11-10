@@ -55,14 +55,30 @@ export const PATH_DASHBOARD = {
     root: path(ROOTS_DASHBOARD, '/manage-pt'),
     add: path(ROOTS_DASHBOARD, '/manage-pt/add'),
   },
-  branch: {
-    root: path(ROOTS_DASHBOARD, '/manage-branch'),
-    // add: path(ROOTS_DASHBOARD, '/manage-branch/add'),
-  },
   exercise: {
     root: path(ROOTS_DASHBOARD, '/manage-exercise'),
     add: path(ROOTS_DASHBOARD, '/manage-exercise/add'),
     details: path(ROOTS_DASHBOARD, '/manage-exercise/details'),
+  },
+  package: {
+    root: path(ROOTS_DASHBOARD, '/manage-package'),
+    // add: path(ROOTS_DASHBOARD, '/manage-branch/add'),
+  },
+  course: {
+    root: path(ROOTS_DASHBOARD, '/manage-course'),
+    // add: path(ROOTS_DASHBOARD, '/manage-branch/add'),
+  },
+  category: {
+    root: path(ROOTS_DASHBOARD, '/manage-category'),
+    // add: path(ROOTS_DASHBOARD, '/manage-branch/add'),
+  },
+  session: {
+    root: path(ROOTS_DASHBOARD, '/manage-session'),
+    // add: path(ROOTS_DASHBOARD, '/manage-branch/add'),
+  },
+  step: {
+    root: path(ROOTS_DASHBOARD, '/manage-step'),
+    // add: path(ROOTS_DASHBOARD, '/manage-branch/add'),
   },
   storeType: {
     root: path(ROOTS_DASHBOARD, '/manage-storetype'),

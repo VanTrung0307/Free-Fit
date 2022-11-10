@@ -1,10 +1,5 @@
-import plusFill from '@iconify/icons-eva/plus-fill';
-import { Icon } from '@iconify/react';
 // material
 import {
-  Autocomplete,
-  Avatar,
-  Box,
   Button,
   Container,
   Dialog,
@@ -12,13 +7,9 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  IconButton,
-  TextField,
-  Tooltip,
-  Typography,
+  Avatar,
 } from '@mui/material';
 // material
-import storeApi from 'api/storeApi';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import HeaderBreadcrumbs from 'components/HeaderBreadcrumbs';
 // @types
@@ -31,16 +22,17 @@ import { useSnackbar } from 'notistack';
 import { useEffect, useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // redux
 // routes
+import courseApi from 'api/FreeFitApi/courseApi';
+import stepApi from 'api/FreeFitApi/stepApi';
 import ResoTable from 'components/table/ResoTable';
 import { TTableColumn } from 'components/table/table';
 import { PATH_DASHBOARD } from 'routes/paths';
-import exerciseApi from 'api/FreeFitApi/exerciseApi';
 import { selectBrandTypeOptions, selectFilter, storeActions } from '../storeSlice';
 
-export default function ExerciseList() {
+export default function StepList() {
   const { themeStretch } = useSettings();
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [storeSelected, setStoreSelected] = useState<Store>();
@@ -65,7 +57,7 @@ export default function ExerciseList() {
   };
   const handelConfirmRemoveClick = async () => {
     try {
-      await exerciseApi.remove(storeSelected?.id || 0);
+      await courseApi.remove(storeSelected?.id || 0);
       const newFilter = { ...filter };
       dispatch(storeActions.setFilter(newFilter));
       enqueueSnackbar(`${storeSelected?.name} ${t('store.deleteSuccess')}`, { variant: 'success' });
@@ -95,14 +87,14 @@ export default function ExerciseList() {
     }
   }, [categoryName]);
 
-  type TExerciseBase = {
+  type TStepBase = {
     id?: number;
+    video?: string;
+    name?: string;
     image?: string;
-    description?: string;
-    categoryId?: number;
-    categoryName?: string;
+    exerciseId?: number;
   };
-  const exerciseColumn: TTableColumn<TExerciseBase>[] = [
+  const stepColumn: TTableColumn<TStepBase>[] = [
     {
       title: 'STT',
       dataIndex: 'index',
@@ -110,55 +102,48 @@ export default function ExerciseList() {
       sortable: false,
     },
     {
+      title: 'ID',
+      dataIndex: 'id',
+      hideInSearch: true,
+      sortable: false,
+    },
+    {
+      title: 'Tên Các Bước',
+      dataIndex: 'name',
+      hideInSearch: true,
+      sortable: false,
+    },
+    {
+      title: 'Video',
+      dataIndex: 'video',
+      hideInSearch: true,
+      sortable: false,
+    },
+    {
       title: 'Hình ảnh',
       dataIndex: 'image',
       hideInSearch: true,
-      render: (src, { categoryName }) => (
-        <Avatar
-          alt={categoryName}
-          src={src}
-          variant="square"
-          style={{ width: '54px', height: '54px' }}
-        />
+      render: (src, { name }) => (
+        <Avatar alt={name} src={src} variant="square" style={{ width: '54px', height: '54px' }} />
       ),
     },
     {
-      title: 'Mô tả',
-      dataIndex: 'description',
+      title: 'Mã bài tập',
+      dataIndex: 'exerciseId',
       hideInSearch: true,
-      sortable: false,
-    },
-    {
-      title: 'Mã mức độ',
-      dataIndex: 'categoryId',
-      hideInSearch: true,
-      sortable: false,
-    },
-    {
-      title: 'Mức độ',
-      dataIndex: 'categoryName',
-      hideInSearch: true,
-      sortable: false,
-    },
-    {
-      title: 'Mức độ',
-      dataIndex: 'categoryName',
-      valueType: 'text',
-      hideInTable: true,
-      hideInSearch: categoryName!,
       sortable: false,
     },
   ];
 
   return (
     <FormProvider {...formMethod}>
-      <Page title={'Exercise'}>
+      <Page title={'Bước Tập'}>
         <Container maxWidth={themeStretch ? false : 'lg'}>
           <HeaderBreadcrumbs
-            heading={'Exercise'}
+            heading={'Bước Tập'}
             links={[
               { name: t('content.dashboard'), href: PATH_DASHBOARD.root },
-              { name: 'Exercise' },
+              { name: 'Bước Tập' },
             ]}
             // action={
             //   <Button
@@ -174,10 +159,10 @@ export default function ExerciseList() {
 
           <Page>
             <ResoTable
-              key={'categoryId'}
+              key={'exerciseId'}
               ref={ref}
-              columns={exerciseColumn}
-              getData={exerciseApi.getAll}
+              columns={stepColumn}
+              getData={stepApi.getAll}
               showAction={true}
               onDelete={handelRemoveClick}
               onEdit={(e) => navigate(`${PATH_DASHBOARD.store.details}/${e.id}`)}

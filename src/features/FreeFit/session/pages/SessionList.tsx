@@ -1,10 +1,5 @@
-import plusFill from '@iconify/icons-eva/plus-fill';
-import { Icon } from '@iconify/react';
 // material
 import {
-  Autocomplete,
-  Avatar,
-  Box,
   Button,
   Container,
   Dialog,
@@ -12,13 +7,8 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  IconButton,
-  TextField,
-  Tooltip,
-  Typography,
 } from '@mui/material';
 // material
-import storeApi from 'api/storeApi';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import HeaderBreadcrumbs from 'components/HeaderBreadcrumbs';
 // @types
@@ -31,16 +21,17 @@ import { useSnackbar } from 'notistack';
 import { useEffect, useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // redux
 // routes
+import courseApi from 'api/FreeFitApi/courseApi';
+import sessionApi from 'api/FreeFitApi/sessionApi';
 import ResoTable from 'components/table/ResoTable';
 import { TTableColumn } from 'components/table/table';
 import { PATH_DASHBOARD } from 'routes/paths';
-import exerciseApi from 'api/FreeFitApi/exerciseApi';
 import { selectBrandTypeOptions, selectFilter, storeActions } from '../storeSlice';
 
-export default function ExerciseList() {
+export default function SessionList() {
   const { themeStretch } = useSettings();
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [storeSelected, setStoreSelected] = useState<Store>();
@@ -65,7 +56,7 @@ export default function ExerciseList() {
   };
   const handelConfirmRemoveClick = async () => {
     try {
-      await exerciseApi.remove(storeSelected?.id || 0);
+      await courseApi.remove(storeSelected?.id || 0);
       const newFilter = { ...filter };
       dispatch(storeActions.setFilter(newFilter));
       enqueueSnackbar(`${storeSelected?.name} ${t('store.deleteSuccess')}`, { variant: 'success' });
@@ -95,14 +86,17 @@ export default function ExerciseList() {
     }
   }, [categoryName]);
 
-  type TExerciseBase = {
+  type TSessionBase = {
     id?: number;
-    image?: string;
-    description?: string;
-    categoryId?: number;
-    categoryName?: string;
+    date?: Date;
+    ptid?: number;
+    courseId?: number;
+    clubId?: number;
+    status?: number;
+    checkInTime?: Date;
+    checkOutTime?: Date;
   };
-  const exerciseColumn: TTableColumn<TExerciseBase>[] = [
+  const sessionColumn: TTableColumn<TSessionBase>[] = [
     {
       title: 'STT',
       dataIndex: 'index',
@@ -110,55 +104,64 @@ export default function ExerciseList() {
       sortable: false,
     },
     {
-      title: 'Hình ảnh',
-      dataIndex: 'image',
-      hideInSearch: true,
-      render: (src, { categoryName }) => (
-        <Avatar
-          alt={categoryName}
-          src={src}
-          variant="square"
-          style={{ width: '54px', height: '54px' }}
-        />
-      ),
-    },
-    {
-      title: 'Mô tả',
-      dataIndex: 'description',
+      title: 'ID',
+      dataIndex: 'id',
       hideInSearch: true,
       sortable: false,
     },
     {
-      title: 'Mã mức độ',
-      dataIndex: 'categoryId',
+      title: 'Ngày Giờ',
+      dataIndex: 'date',
       hideInSearch: true,
       sortable: false,
     },
     {
-      title: 'Mức độ',
-      dataIndex: 'categoryName',
+      title: 'Mã PT',
+      dataIndex: 'ptid',
       hideInSearch: true,
       sortable: false,
     },
     {
-      title: 'Mức độ',
-      dataIndex: 'categoryName',
-      valueType: 'text',
-      hideInTable: true,
-      hideInSearch: categoryName!,
+      title: 'Mã khoá học',
+      dataIndex: 'courseId',
+      hideInSearch: true,
+      sortable: false,
+    },
+    {
+      title: 'Mã Phòng tập',
+      dataIndex: 'clubId',
+      hideInSearch: true,
+      sortable: false,
+    },
+    {
+      title: 'Trạng thái',
+      dataIndex: 'status',
+      hideInSearch: true,
+      sortable: false,
+    },
+    {
+      title: 'Check In',
+      dataIndex: 'checkInTime',
+      hideInSearch: true,
+      sortable: false,
+    },
+    {
+      title: 'Check Out',
+      dataIndex: 'checkOutTime',
+      hideInSearch: true,
       sortable: false,
     },
   ];
 
   return (
     <FormProvider {...formMethod}>
-      <Page title={'Exercise'}>
+      <Page title={'Lớp Tập'}>
         <Container maxWidth={themeStretch ? false : 'lg'}>
           <HeaderBreadcrumbs
-            heading={'Exercise'}
+            heading={'Lớp Tập'}
             links={[
               { name: t('content.dashboard'), href: PATH_DASHBOARD.root },
-              { name: 'Exercise' },
+              { name: 'Lớp Tập' },
             ]}
             // action={
             //   <Button
@@ -174,10 +177,10 @@ export default function ExerciseList() {
 
           <Page>
             <ResoTable
-              key={'categoryId'}
+              key={'registerId'}
               ref={ref}
-              columns={exerciseColumn}
-              getData={exerciseApi.getAll}
+              columns={sessionColumn}
+              getData={sessionApi.getAll}
               showAction={true}
               onDelete={handelRemoveClick}
               onEdit={(e) => navigate(`${PATH_DASHBOARD.store.details}/${e.id}`)}

@@ -2,8 +2,6 @@ import plusFill from '@iconify/icons-eva/plus-fill';
 import { Icon } from '@iconify/react';
 // material
 import {
-  Autocomplete,
-  Box,
   Button,
   Container,
   Dialog,
@@ -11,10 +9,6 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  IconButton,
-  TextField,
-  Tooltip,
-  Typography,
 } from '@mui/material';
 // material
 import storeApi from 'api/storeApi';
@@ -33,11 +27,10 @@ import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // redux
 // routes
-import { Visibility } from '@mui/icons-material';
+import clubApi from 'api/FreeFitApi/clubApi';
 import ResoTable from 'components/table/ResoTable';
 import { TTableColumn } from 'components/table/table';
 import { PATH_DASHBOARD } from 'routes/paths';
-import { fDate, fDateTimeSuffix2 } from 'utils/formatTime';
 import { selectBrandTypeOptions, selectFilter, storeActions } from '../storeSlice';
 
 export default function ClubList() {
@@ -95,106 +88,40 @@ export default function ClubList() {
     }
   }, [brandName]);
 
-  type TStoreBase = {
-    address?: string;
-    brandId?: number;
-    brandName?: string;
-    building?: { id?: any; isEditable?: boolean; name?: string };
-    buildingId?: number;
-    createDate?: string;
+  type TClubBase = {
     id?: number;
-    imageUrl?: string;
-    name?: string;
-    status?: number;
-    storeCode?: string;
-    storeTypeId?: number;
-    storeTypeName?: string;
-    type?: string;
-    SearchBy?: string;
-    KeySearch?: string;
-    phone?: string;
-    bank?: string;
+    address?: string;
+    area?: string;
+    managerName?: string;
   };
-  const storeColumn: TTableColumn<TStoreBase>[] = [
+  const clubColumn: TTableColumn<TClubBase>[] = [
     {
       title: 'STT',
       dataIndex: 'index',
       hideInSearch: true,
       sortable: false,
     },
-    // { title: 'Họ và Tên', dataIndex: 'brandName', hideInSearch: true, sortable: false },
-    // {
-    //   title: 'Họ và Tên',
-    //   dataIndex: 'brandName',
-    //   hideInTable: true,
-    //   valueEnum: brandTypeOptions.map((item) => ({ label: item.name, value: item.id })),
-    //   render(value, data, index) {
-    //     return value;
-    //   },
-    //   renderFormItem() {
-    //     return (
-    //       <Autocomplete
-    //         value={brandName}
-    //         onChange={handleChange}
-    //         id="controllable-states-demo"
-    //         options={brandOptions}
-    //         renderInput={(params) => <TextField {...params} label="Tên thương hiệu" />}
-    //       />
-    //     );
-    //   },
-    //   sortable: false,
-    // },
-    { title: 'Tên Phòng Tập', dataIndex: 'brandName', hideInSearch: true, sortable: false },
     {
-      title: 'Tên Phòng Tập',
-      dataIndex: 'brandName',
-      hideInTable: true,
-      valueEnum: brandTypeOptions.map((item) => ({ label: item.name, value: item.id })),
-      render(value, data, index) {
-        return value;
-      },
-      renderFormItem() {
-        return (
-          <Autocomplete
-            value={brandName}
-            onChange={handleChange}
-            id="controllable-states-demo"
-            options={brandOptions}
-            renderInput={(params) => <TextField {...params} label="Tên Phòng Tập" />}
-          />
-        );
-      },
-      sortable: false,
-    },
-    // {
-    //   title: 'Ngày Sinh',
-    //   dataIndex: 'createDate',
-    //   hideInSearch: true,
-    //   hideInTable: false,
-    //   sortable: false,
-    //   render(value, data, index) {
-    //     return <Box>{fDate(data?.createDate!)}</Box>;
-    //   },
-    // },
-    {
-      title: 'Số điện thoại',
-      dataIndex: 'phone',
+      title: 'ID',
+      dataIndex: 'id',
       hideInSearch: true,
       sortable: false,
-    },
-    {
-      title: 'Ngày Tạo',
-      dataIndex: 'createDate',
-      hideInSearch: true,
-      hideInTable: false,
-      sortable: false,
-      render(value, data, index) {
-        return <Box>{fDateTimeSuffix2(data?.createDate!)}</Box>;
-      },
     },
     {
       title: 'Địa chỉ',
       dataIndex: 'address',
+      hideInSearch: true,
+      sortable: false,
+    },
+    {
+      title: 'Khu vực',
+      dataIndex: 'area',
+      hideInSearch: true,
+      sortable: false,
+    },
+    {
+      title: 'Người quản lí',
+      dataIndex: 'managerName',
       hideInSearch: true,
       sortable: false,
     },
@@ -226,8 +153,8 @@ export default function ClubList() {
             <ResoTable
               key={'store-id'}
               ref={ref}
-              columns={storeColumn}
-              getData={storeApi.getAllPaging}
+              columns={clubColumn}
+              getData={clubApi.getAll}
               showAction={true}
               onDelete={handelRemoveClick}
               onEdit={(e) => navigate(`${PATH_DASHBOARD.store.details}/${e.id}`)}

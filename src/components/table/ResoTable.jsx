@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
     width: '60px',
     position: 'sticky',
     left: (props) => props.left ?? '0',
-    backgroundColor: 'white',
+    backgroundColor: 'dark',
     // borderRight: `1px solid ${theme.palette.grey[400]}`
   },
   stickyRight: {
@@ -107,7 +107,7 @@ const useStyles = makeStyles((theme) => ({
     width: '60px',
     position: 'sticky',
     right: (props) => props.right ?? '0',
-    backgroundColor: '#fff',
+    backgroundColor: 'dark',
     // borderLeft: `1px solid ${theme.palette.grey[400]}`
   },
   body: {},

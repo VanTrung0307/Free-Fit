@@ -65,27 +65,6 @@ export default function Router() {
           children: [
             { path: '/', element: <CustomerList /> },
             { path: 'add', element: <AddEditCustomerPage /> },
-            { path: 'details/:storeId', element: <CustomerViewPage /> },
-            { path: 'details/edit-info/:storeId', element: <AddEditCustomerPage /> },
-            { path: 'details/edit-attrs/:storeId/:storeTypeId', element: <EditAttrsPage /> },
-            {
-              path: 'details/edit-templates/:storeId/:isStoreView',
-              element: <StoreTemplatePage />,
-            },
-          ],
-        },
-        {
-          path: 'manage-branch',
-          children: [
-            { path: '/', element: <BranchList /> },
-            // { path: 'add', element: <AddEditCustomerPage /> },
-            { path: 'details/:storeId', element: <StoreViewPage /> },
-            { path: 'details/edit-info/:storeId', element: <AddEditCustomerPage /> },
-            { path: 'details/edit-attrs/:storeId/:storeTypeId', element: <EditAttrsPage /> },
-            {
-              path: 'details/edit-templates/:storeId/:isStoreView',
-              element: <StoreTemplatePage />,
-            },
           ],
         },
         {
@@ -93,13 +72,6 @@ export default function Router() {
           children: [
             { path: '/', element: <ClubList /> },
             { path: 'add', element: <AddEditClubPage /> },
-            { path: 'details/:storeId', element: <StoreViewPage /> },
-            { path: 'details/edit-info/:storeId', element: <AddEditStorePage /> },
-            { path: 'details/edit-attrs/:storeId/:storeTypeId', element: <EditAttrsPage /> },
-            {
-              path: 'details/edit-templates/:storeId/:isStoreView',
-              element: <StoreTemplatePage />,
-            },
           ],
         },
         {
@@ -107,13 +79,6 @@ export default function Router() {
           children: [
             { path: '/', element: <PTList /> },
             { path: 'add', element: <AddEditPTPage /> },
-            { path: 'details/:storeId', element: <StoreViewPage /> },
-            { path: 'details/edit-info/:storeId', element: <AddEditStorePage /> },
-            { path: 'details/edit-attrs/:storeId/:storeTypeId', element: <EditAttrsPage /> },
-            {
-              path: 'details/edit-templates/:storeId/:isStoreView',
-              element: <StoreTemplatePage />,
-            },
           ],
         },
         {
@@ -121,14 +86,27 @@ export default function Router() {
           children: [
             { path: '/', element: <ExerciseList /> },
             { path: 'add', element: <AddEditExercisePage /> },
-            { path: 'details/:exerciseId', element: <StoreViewPage /> },
-            { path: 'details/edit-info/:storeId', element: <AddEditExercisePage /> },
-            { path: 'details/edit-attrs/:storeId/:storeTypeId', element: <EditAttrsPage /> },
-            {
-              path: 'details/edit-templates/:storeId/:isStoreView',
-              element: <StoreTemplatePage />,
-            },
           ],
+        },
+        {
+          path: 'manage-package',
+          children: [{ path: '/', element: <PackageList /> }],
+        },
+        {
+          path: 'manage-course',
+          children: [{ path: '/', element: <CourseList /> }],
+        },
+        {
+          path: 'manage-category',
+          children: [{ path: '/', element: <CategoryList /> }],
+        },
+        {
+          path: 'manage-session',
+          children: [{ path: '/', element: <SessionList /> }],
+        },
+        {
+          path: 'manage-step',
+          children: [{ path: '/', element: <StepList /> }],
         },
         {
           path: 'manage-storetype',
@@ -144,130 +122,130 @@ export default function Router() {
             },
           ],
         },
-        {
-          path: 'manage-brand',
-          children: [
-            { path: '/', element: <BrandList /> },
-            { path: 'add', element: <AddEditBrandPage /> },
-            { path: 'details/:brandId', element: <BrandViewPage /> },
-            { path: 'details/edit-info/:brandId', element: <AddEditBrandPage /> },
-          ],
-        },
-        {
-          path: 'manage-segment',
-          children: [
-            { path: '/', element: <SegmentList /> },
-            { path: 'add', element: <SegmentList /> },
-            { path: 'details/:segmentId', element: <SegmentList /> },
-            { path: 'details/edit-info/:segmentId', element: <SegmentList /> },
-          ],
-        },
-        {
-          path: 'manage-account',
-          children: [
-            { path: '/', element: <AccountList /> },
-            { path: 'add', element: <AddEditAccountPage /> },
-            { path: 'details/:accountId', element: <BrandViewPage /> },
-            { path: 'details/edit-info/:accountId', element: <AddEditAccountPage /> },
-          ],
-        },
-        { path: 'brand-map', element: <BrandMap /> },
+        // {
+        //   path: 'manage-brand',
+        //   children: [
+        //     { path: '/', element: <BrandList /> },
+        //     { path: 'add', element: <AddEditBrandPage /> },
+        //     { path: 'details/:brandId', element: <BrandViewPage /> },
+        //     { path: 'details/edit-info/:brandId', element: <AddEditBrandPage /> },
+        //   ],
+        // },
+        // {
+        //   path: 'manage-segment',
+        //   children: [
+        //     { path: '/', element: <SegmentList /> },
+        //     { path: 'add', element: <SegmentList /> },
+        //     { path: 'details/:segmentId', element: <SegmentList /> },
+        //     { path: 'details/edit-info/:segmentId', element: <SegmentList /> },
+        //   ],
+        // },
+        // {
+        //   path: 'manage-account',
+        //   children: [
+        //     { path: '/', element: <AccountList /> },
+        //     { path: 'add', element: <AddEditAccountPage /> },
+        //     { path: 'details/:accountId', element: <BrandViewPage /> },
+        //     { path: 'details/edit-info/:accountId', element: <AddEditAccountPage /> },
+        //   ],
+        // },
+        // { path: 'brand-map', element: <BrandMap /> },
         { path: 'analytics', element: <Dashboard /> },
-        {
-          path: 'templates',
-          children: [
-            { path: '/', element: <Template /> },
-            { path: 'edit-templates/:storeId/:isStoreView', element: <StoreTemplatePage /> },
-          ],
-        },
-        {
-          path: 'pois',
-          children: [
-            { path: '/', element: <PoiList /> },
-            { path: 'add', element: <AddEditPoiPage /> },
-            { path: 'edit/:poiId', element: <AddEditPoiPage /> },
-          ],
-        },
-        {
-          path: 'brand-pois',
-          children: [
-            { path: '/', element: <PoiBrandList /> },
-            { path: 'add', element: <AddEditPoiBrandPage /> },
-            { path: 'edit/:poiId', element: <AddEditPoiBrandPage /> },
-          ],
-        },
-        { path: 'coming-soon', element: <ComingSoon /> },
-        {
-          path: 'manage-assets',
-          children: [
-            { path: 'list', element: <AssetList /> },
-            { path: 'violation/list', element: <ComingSoon /> },
-            { path: 'add', element: <AddEditAssetPage /> },
-            { path: 'edit/:assetId', element: <AddEditAssetPage /> },
-          ],
-        },
-        {
-          path: 'group-zones',
-          children: [
-            { path: '/', element: <GroupZoneListPage /> },
-            { path: 'add', element: <AddEditGroupZonePage /> },
-            { path: 'edit/:groupZoneId', element: <AddEditGroupZonePage /> },
-          ],
-        },
-        {
-          path: 'trade-zones',
-          children: [
-            { path: 'calendar', element: <CalendarTradeZoneVersion /> },
-            { path: 'versions-list', element: <TzVersionList /> },
-            { path: 'list', element: <TradeZoneList /> },
-            { path: 'list/add', element: <AddEditTradeZonePage /> },
-            {
-              path: 'list/edit/:storeId/:tradeZoneId',
-              element: <AddEditTradeZonePage />,
-            },
-            {
-              path: 'versions-list/details/:tzVersionId',
-              element: <TradeZoneVersionDetailsPage />,
-            },
-            { path: 'versions-list/edit/:tzVersionId', element: <EditTzVersionPage /> },
-            { path: 'versions-list/add', element: <EditTzVersionPage /> },
-            { path: 'details/:tradeZoneVersionId', element: <AddEditAssetPage /> },
-          ],
-        },
-        {
-          path: 'teams',
-          children: [
-            { path: '/', element: <TeamList /> },
-            { path: 'add', element: <AddEditTeamPage /> },
-            { path: 'edit/:teamId', element: <AddEditTeamPage /> },
-          ],
-        },
-        {
-          path: 'agents',
-          children: [
-            { path: '/', element: <AgentList /> },
-            { path: 'add', element: <AddEditAgentPage /> },
-            { path: 'edit/:agentId', element: <AddEditAgentPage /> },
-          ],
-        },
-        {
-          path: 'orders',
-          children: [
-            { path: '/', element: <OrderList /> },
-            { path: ':storeId', element: <OrderList /> },
-            { path: 'add', element: <AddEditOrderPage /> },
-            { path: 'edit/:orderId', element: <AddEditOrderPage /> },
-          ],
-        },
-        {
-          path: 'tasks',
-          children: [
-            { path: '/', element: <TaskList /> },
-            { path: 'add', element: <AddEditTaskPage /> },
-            { path: 'edit/:taskId', element: <ComingSoon /> },
-            { path: 'details/:taskId', element: <TaskDetailsPage /> },
-          ],
-        },
+        // {
+        //   path: 'templates',
+        //   children: [
+        //     { path: '/', element: <Template /> },
+        //     { path: 'edit-templates/:storeId/:isStoreView', element: <StoreTemplatePage /> },
+        //   ],
+        // },
+        // {
+        //   path: 'pois',
+        //   children: [
+        //     { path: '/', element: <PoiList /> },
+        //     { path: 'add', element: <AddEditPoiPage /> },
+        //     { path: 'edit/:poiId', element: <AddEditPoiPage /> },
+        //   ],
+        // },
+        // {
+        //   path: 'brand-pois',
+        //   children: [
+        //     { path: '/', element: <PoiBrandList /> },
+        //     { path: 'add', element: <AddEditPoiBrandPage /> },
+        //     { path: 'edit/:poiId', element: <AddEditPoiBrandPage /> },
+        //   ],
+        // },
+        // { path: 'coming-soon', element: <ComingSoon /> },
+        // {
+        //   path: 'manage-assets',
+        //   children: [
+        //     { path: 'list', element: <AssetList /> },
+        //     { path: 'violation/list', element: <ComingSoon /> },
+        //     { path: 'add', element: <AddEditAssetPage /> },
+        //     { path: 'edit/:assetId', element: <AddEditAssetPage /> },
+        //   ],
+        // },
+        // {
+        //   path: 'group-zones',
+        //   children: [
+        //     { path: '/', element: <GroupZoneListPage /> },
+        //     { path: 'add', element: <AddEditGroupZonePage /> },
+        //     { path: 'edit/:groupZoneId', element: <AddEditGroupZonePage /> },
+        //   ],
+        // },
+        // {
+        //   path: 'trade-zones',
+        //   children: [
+        //     { path: 'calendar', element: <CalendarTradeZoneVersion /> },
+        //     { path: 'versions-list', element: <TzVersionList /> },
+        //     { path: 'list', element: <TradeZoneList /> },
+        //     { path: 'list/add', element: <AddEditTradeZonePage /> },
+        //     {
+        //       path: 'list/edit/:storeId/:tradeZoneId',
+        //       element: <AddEditTradeZonePage />,
+        //     },
+        //     {
+        //       path: 'versions-list/details/:tzVersionId',
+        //       element: <TradeZoneVersionDetailsPage />,
+        //     },
+        //     { path: 'versions-list/edit/:tzVersionId', element: <EditTzVersionPage /> },
+        //     { path: 'versions-list/add', element: <EditTzVersionPage /> },
+        //     { path: 'details/:tradeZoneVersionId', element: <AddEditAssetPage /> },
+        //   ],
+        // },
+        // {
+        //   path: 'teams',
+        //   children: [
+        //     { path: '/', element: <TeamList /> },
+        //     { path: 'add', element: <AddEditTeamPage /> },
+        //     { path: 'edit/:teamId', element: <AddEditTeamPage /> },
+        //   ],
+        // },
+        // {
+        //   path: 'agents',
+        //   children: [
+        //     { path: '/', element: <AgentList /> },
+        //     { path: 'add', element: <AddEditAgentPage /> },
+        //     { path: 'edit/:agentId', element: <AddEditAgentPage /> },
+        //   ],
+        // },
+        // {
+        //   path: 'orders',
+        //   children: [
+        //     { path: '/', element: <OrderList /> },
+        //     { path: ':storeId', element: <OrderList /> },
+        //     { path: 'add', element: <AddEditOrderPage /> },
+        //     { path: 'edit/:orderId', element: <AddEditOrderPage /> },
+        //   ],
+        // },
+        // {
+        //   path: 'tasks',
+        //   children: [
+        //     { path: '/', element: <TaskList /> },
+        //     { path: 'add', element: <AddEditTaskPage /> },
+        //     { path: 'edit/:taskId', element: <ComingSoon /> },
+        //     { path: 'details/:taskId', element: <TaskDetailsPage /> },
+        //   ],
+        // },
         {
           path: '/settings',
           children: [
@@ -410,8 +388,12 @@ const PTList = Loadable(lazy(() => import('features/FreeFit/Trainer_PT/pages/PTL
 const AddEditPTPage = Loadable(
   lazy(() => import('features/FreeFit/Trainer_PT/pages/AddEditPTPage'))
 );
-const BranchList = Loadable(lazy(() => import('features/FreeFit/Branch/pages/BranchList')));
 const ExerciseList = Loadable(lazy(() => import('features/FreeFit/Exercises/pages/ExerciseList')));
 const AddEditExercisePage = Loadable(
   lazy(() => import('features/FreeFit/Exercises/pages/AddEditExercisePage'))
 );
+const PackageList = Loadable(lazy(() => import('features/FreeFit/package/pages/PackageList')));
+const CourseList = Loadable(lazy(() => import('features/FreeFit/course/pages/CourseList')));
+const CategoryList = Loadable(lazy(() => import('features/FreeFit/category/pages/CategoryList')));
+const SessionList = Loadable(lazy(() => import('features/FreeFit/session/pages/SessionList')));
+const StepList = Loadable(lazy(() => import('features/FreeFit/step/pages/StepList')));

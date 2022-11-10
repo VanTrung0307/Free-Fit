@@ -82,15 +82,36 @@ export default function SidebarConfig() {
           icon: ICONS.agent,
         },
         {
-          title: 'Branch',
-          path: PATH_DASHBOARD.branch.root,
-          icon: ICONS.poiBrand,
-        },
-        {
           title: 'Exercise',
           path: PATH_DASHBOARD.exercise.root,
-          icon: ICONS.poiBrand,
+          icon: ICONS.task,
         },
+        {
+          title: 'Package',
+          path: PATH_DASHBOARD.package.root,
+          icon: ICONS.order,
+        },
+        {
+          title: 'Course',
+          path: PATH_DASHBOARD.course.root,
+          icon: ICONS.template,
+        },
+        {
+          title: 'Session',
+          path: PATH_DASHBOARD.session.root,
+          icon: ICONS.template,
+        },
+        {
+          title: 'Step',
+          path: PATH_DASHBOARD.step.root,
+          icon: ICONS.segment,
+        },
+        //
+        // {
+        //   title: 'Category',
+        //   path: PATH_DASHBOARD.category.root,
+        //   icon: ICONS.poi,
+        // },
       ],
     },
     // {

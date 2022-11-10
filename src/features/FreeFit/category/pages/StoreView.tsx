@@ -38,8 +38,8 @@ import { Link as RouterLink } from 'react-router-dom';
 import { PATH_DASHBOARD } from 'routes/paths';
 import AttrView from '../components/AttrView';
 import { Block } from '../components/Block';
-import { storeActions } from '../storeSlice';
 import './style.css';
+import { storeActions } from '../storeSlice';
 
 interface StoreViewPageProps {}
 const style = {

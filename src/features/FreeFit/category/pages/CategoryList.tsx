@@ -1,9 +1,5 @@
-import plusFill from '@iconify/icons-eva/plus-fill';
-import { Icon } from '@iconify/react';
 // material
 import {
-  Autocomplete,
-  Box,
   Button,
   Container,
   Dialog,
@@ -11,13 +7,8 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  IconButton,
-  TextField,
-  Tooltip,
-  Typography,
 } from '@mui/material';
 // material
-import storeApi from 'api/storeApi';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import HeaderBreadcrumbs from 'components/HeaderBreadcrumbs';
 // @types
@@ -30,17 +21,17 @@ import { useSnackbar } from 'notistack';
 import { useEffect, useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // redux
 // routes
-import { Visibility } from '@mui/icons-material';
+import categoryApi from 'api/FreeFitApi/categoryApi';
+import courseApi from 'api/FreeFitApi/courseApi';
 import ResoTable from 'components/table/ResoTable';
 import { TTableColumn } from 'components/table/table';
 import { PATH_DASHBOARD } from 'routes/paths';
-import { fDate, fDateTimeSuffix2 } from 'utils/formatTime';
 import { selectBrandTypeOptions, selectFilter, storeActions } from '../storeSlice';
 
-export default function BranchList() {
+export default function CategoryList() {
   const { themeStretch } = useSettings();
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [storeSelected, setStoreSelected] = useState<Store>();
@@ -65,7 +56,7 @@ export default function BranchList() {
   };
   const handelConfirmRemoveClick = async () => {
     try {
-      await storeApi.remove(storeSelected?.id || 0);
+      await courseApi.remove(storeSelected?.id || 0);
       const newFilter = { ...filter };
       dispatch(storeActions.setFilter(newFilter));
       enqueueSnackbar(`${storeSelected?.name} ${t('store.deleteSuccess')}`, { variant: 'success' });
@@ -79,74 +70,42 @@ export default function BranchList() {
 
   const brandOptions = brandTypeOptions.map((c) => ({ label: c.name, value: c.id }));
 
-  const [brandName, setBrandName] = useState<any>(null);
+  const [categoryName, setCategoryName] = useState<any>(null);
   const handleChange = (event: any, newValue: any) => {
-    setBrandName(newValue);
+    setCategoryName(newValue);
   };
 
   useEffect(() => {
-    if (brandName === null) {
-      ref.current.formControl.setValue('SearchBy', '');
-      ref.current.formControl.setValue('KeySearch', '');
+    if (categoryName === null) {
+      ref.current.formControl.setValue('categoryName', '');
+      ref.current.formControl.setValue('categoryName', '');
     }
-    if (ref.current && brandName) {
-      ref.current.formControl.setValue('SearchBy', 'Brand');
-      ref.current.formControl.setValue('KeySearch', brandName.value);
+    if (ref.current && categoryName) {
+      ref.current.formControl.setValue('categoryName', 'categoryName');
+      ref.current.formControl.setValue('categoryName', categoryName.value);
     }
-  }, [brandName]);
+  }, [categoryName]);
 
-  type TStoreBase = {
-    address?: string;
-    brandId?: number;
-    brandName?: string;
-    building?: { id?: any; isEditable?: boolean; name?: string };
-    buildingId?: number;
-    createDate?: string;
+  type TCategoryBase = {
     id?: number;
-    imageUrl?: string;
     name?: string;
-    status?: number;
-    storeCode?: string;
-    storeTypeId?: number;
-    storeTypeName?: string;
-    type?: string;
-    SearchBy?: string;
-    KeySearch?: string;
-    phone?: string;
-    bank?: string;
   };
-  const storeColumn: TTableColumn<TStoreBase>[] = [
+  const categoryColumn: TTableColumn<TCategoryBase>[] = [
     {
       title: 'STT',
       dataIndex: 'index',
       hideInSearch: true,
       sortable: false,
     },
-    { title: 'Tên thương hiệu', dataIndex: 'brandName', hideInSearch: true, sortable: false },
     {
-      title: 'Tên thương hiệu',
-      dataIndex: 'brandName',
-      hideInTable: true,
-      valueEnum: brandTypeOptions.map((item) => ({ label: item.name, value: item.id })),
-      render(value, data, index) {
-        return value;
-      },
-      renderFormItem() {
-        return (
-          <Autocomplete
-            value={brandName}
-            onChange={handleChange}
-            id="controllable-states-demo"
-            options={brandOptions}
-            renderInput={(params) => <TextField {...params} label="Tên thương hiệu" />}
-          />
-        );
-      },
+      title: 'ID',
+      dataIndex: 'id',
+      hideInSearch: true,
       sortable: false,
     },
     {
-      title: 'Địa chỉ',
-      dataIndex: 'address',
+      title: 'Mức độ Tập',
+      dataIndex: 'name',
       hideInSearch: true,
       sortable: false,
     },
@@ -154,33 +113,32 @@ export default function BranchList() {
 
   return (
     <FormProvider {...formMethod}>
-      <Page title={'Customer'}>
+      <Page title={'Gói Tập'}>
         <Container maxWidth={themeStretch ? false : 'lg'}>
           <HeaderBreadcrumbs
-            heading={'Khách hàng'}
+            heading={'Gói Tập'}
             links={[
               { name: t('content.dashboard'), href: PATH_DASHBOARD.root },
-
-              { name: 'Khách hàng' },
+              { name: 'Gói Tập' },
             ]}
             // action={
             //   <Button
             //     variant="contained"
             //     component={RouterLink}
-            //     to={PATH_DASHBOARD.customer.add}
+            //     to={PATH_DASHBOARD.exercise.add}
             //     startIcon={<Icon icon={plusFill} />}
             //   >
-            //     {'Thêm Khách Hàng'}
+            //     {'Thêm PT'}
             //   </Button>
             // }
           />
 
           <Page>
             <ResoTable
-              key={'store-id'}
+              key={'registerId'}
               ref={ref}
-              columns={storeColumn}
-              getData={storeApi.getAllPaging}
+              columns={categoryColumn}
+              getData={categoryApi.getAll}
               showAction={true}
               onDelete={handelRemoveClick}
               onEdit={(e) => navigate(`${PATH_DASHBOARD.store.details}/${e.id}`)}

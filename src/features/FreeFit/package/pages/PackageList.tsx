@@ -3,7 +3,6 @@ import { Icon } from '@iconify/react';
 // material
 import {
   Autocomplete,
-  Avatar,
   Box,
   Button,
   Container,
@@ -40,7 +39,7 @@ import { PATH_DASHBOARD } from 'routes/paths';
 import exerciseApi from 'api/FreeFitApi/exerciseApi';
 import { selectBrandTypeOptions, selectFilter, storeActions } from '../storeSlice';
 
-export default function ExerciseList() {
+export default function PackageList() {
   const { themeStretch } = useSettings();
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [storeSelected, setStoreSelected] = useState<Store>();
@@ -95,14 +94,12 @@ export default function ExerciseList() {
     }
   }, [categoryName]);
 
-  type TExerciseBase = {
+  type TPackageBase = {
     id?: number;
-    image?: string;
+    name?: string;
     description?: string;
-    categoryId?: number;
-    categoryName?: string;
   };
-  const exerciseColumn: TTableColumn<TExerciseBase>[] = [
+  const packageColumn: TTableColumn<TPackageBase>[] = [
     {
       title: 'STT',
       dataIndex: 'index',
@@ -110,17 +107,16 @@ export default function ExerciseList() {
       sortable: false,
     },
     {
-      title: 'Hình ảnh',
-      dataIndex: 'image',
+      title: 'ID',
+      dataIndex: 'id',
       hideInSearch: true,
-      render: (src, { categoryName }) => (
-        <Avatar
-          alt={categoryName}
-          src={src}
-          variant="square"
-          style={{ width: '54px', height: '54px' }}
-        />
-      ),
+      sortable: false,
+    },
+    {
+      title: 'Tên Gói',
+      dataIndex: 'name',
+      hideInSearch: true,
+      sortable: false,
     },
     {
       title: 'Mô tả',
@@ -128,37 +124,17 @@ export default function ExerciseList() {
       hideInSearch: true,
       sortable: false,
     },
-    {
-      title: 'Mã mức độ',
-      dataIndex: 'categoryId',
-      hideInSearch: true,
-      sortable: false,
-    },
-    {
-      title: 'Mức độ',
-      dataIndex: 'categoryName',
-      hideInSearch: true,
-      sortable: false,
-    },
-    {
-      title: 'Mức độ',
-      dataIndex: 'categoryName',
-      valueType: 'text',
-      hideInTable: true,
-      hideInSearch: categoryName!,
-      sortable: false,
-    },
   ];
 
   return (
     <FormProvider {...formMethod}>
-      <Page title={'Exercise'}>
+      <Page title={'Gói Tập'}>
         <Container maxWidth={themeStretch ? false : 'lg'}>
           <HeaderBreadcrumbs
-            heading={'Exercise'}
+            heading={'Gói Tập'}
             links={[
               { name: t('content.dashboard'), href: PATH_DASHBOARD.root },
-              { name: 'Exercise' },
+              { name: 'Gói Tập' },
             ]}
             // action={
             //   <Button
@@ -176,7 +152,7 @@ export default function ExerciseList() {
             <ResoTable
               key={'categoryId'}
               ref={ref}
-              columns={exerciseColumn}
+              columns={packageColumn}
               getData={exerciseApi.getAll}
               showAction={true}
               onDelete={handelRemoveClick}

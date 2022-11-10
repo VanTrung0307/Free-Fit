@@ -1,16 +1,16 @@
 import { PaginationRequest, Response, Store, StoreType, TradeZone, BrandType } from 'models';
 import { AttrResponse } from 'models/dto/attrResponse';
-import { Exercise } from 'models/freefit/exercise';
-import { PostAttr } from '../models/dto/attr';
-import { PostStore, Template, PostTemplate } from '../models/dto/store';
-import axiosClient from './axiosClient';
+import { Step } from 'models/freefit/step';
+import { PostAttr } from '../../models/dto/attr';
+import { PostStore, Template, PostTemplate } from '../../models/dto/store';
+import axiosClient from '../axiosClient';
 
-const exerciseApi = {
-  getAll(): Promise<Array<Exercise>> {
-    const url = '/exercise';
+const stepApi = {
+  getAll(): Promise<Array<Step>> {
+    const url = '/step';
     return axiosClient.get(url);
   },
-  getAllPaging(params: PaginationRequest): Promise<Response<Exercise>> {
+  getAllPaging(params: PaginationRequest): Promise<Response<Step>> {
     const url = '/exercise/paging';
     return axiosClient.get(url, { params });
   },
@@ -26,7 +26,7 @@ const exerciseApi = {
     const url = `/stores/brand/${id}`;
     return axiosClient.delete(url);
   },
-  getExcerciseById(id: string): Promise<Exercise> {
+  getExcerciseById(id: string): Promise<Step> {
     const url = `/exercise/${id}`;
     return axiosClient.get(url);
   },
@@ -67,4 +67,4 @@ const exerciseApi = {
     return axiosClient.get(url);
   },
 };
-export default exerciseApi;
+export default stepApi;

@@ -36,7 +36,8 @@ export default function ThemeConfig({ children }: ThemeConfigProps) {
 
   const themeOptions: DeprecatedThemeOptions = useMemo(
     () => ({
-      palette: isLight ? { ...palette.light, mode: 'light' } : { ...palette.dark, mode: 'dark' },
+      palette: { ...palette.dark, mode: 'dark' },
+      // isLight ? { ...palette.light, mode: 'light' } :
       shape,
       typography,
       breakpoints,

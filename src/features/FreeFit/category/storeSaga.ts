@@ -18,8 +18,8 @@ import campusApi from 'api/campusApi';
 import buildingApi from 'api/buildingApi';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { functions } from 'lodash';
-import { storeActions } from './storeSlice';
 import { Template } from '../../../models/dto/store';
+import { storeActions } from './storeSlice';
 
 function* fetchStore(action: PayloadAction<PaginationRequest>) {
   try {
