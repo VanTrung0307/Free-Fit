@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "PORT=6280 react-scripts start",
+    "start": "PORT=6280 react-scripts --openssl-legacy-provider start",
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "prebuild": "npm install caniuse-lite --force",
