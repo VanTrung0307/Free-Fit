@@ -45,7 +45,7 @@ export default function LoginForm() {
       if (values.username == fakeLogin.username && values.password == fakeLogin.password) {
         localStorage.setItem('access_token', 'random_code');
         // navigate('/dashboard');
-        window.location.href = '/dashboard';
+        window.location.href = '/dashboard/analytics';
       }
     },
   });
