@@ -24,7 +24,7 @@ const RootStyle = styled(Page)(({ theme }) => ({
 
 export default function EnterprisePage() {
   return (
-    <RootStyle title="Customer App | Trade Zone Map" id="move_top">
+    <RootStyle title="Customer App | FreeFit" id="move_top">
       <CustomerHero />
       <CustomerFeatures />
 

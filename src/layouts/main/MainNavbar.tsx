@@ -100,17 +100,22 @@ export default function MainNavbar() {
             </RouterLink>
           </Box>
 
-          <MHidden width="mdDown">
+          {/* <MHidden width="mdDown">
             <MenuDesktop isOffset={isOffset} isHome={isHome} navConfig={navConfig} />
-          </MHidden>
+          </MHidden> */}
 
-          <Box sx={{ flexGrow: 1 }} />
+          {/* <Box sx={{ flexGrow: 1 }} /> */}
 
-          <MHidden width="mdDown">
+          {/* <MHidden width="mdDown">
             <MenuDesktop isOffset={isOffset} isHome={isHome} navConfig={rightMenuConfig} />
-          </MHidden>
+          </MHidden> */}
           <MHidden width="mdDown">
-            <Button variant="contained" component={RouterLink} to={PATH_DASHBOARD.root}>
+            <Button
+              sx={{ backgroundColor: 'warning.main' }}
+              variant="contained"
+              component={RouterLink}
+              to={PATH_DASHBOARD.root}
+            >
               {t('content.login')}
             </Button>
           </MHidden>

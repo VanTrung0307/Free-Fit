@@ -48,7 +48,7 @@ const ListItemStyle = styled(ListItemButton)(({ theme }) => ({
     position: 'absolute',
     borderTopLeftRadius: 4,
     borderBottomLeftRadius: 4,
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.warning.main,
   },
 }));
 
@@ -86,9 +86,9 @@ function NavItem({ item, isShow }: { item: NavItemProps; isShow?: boolean | unde
   };
 
   const activeRootStyle = {
-    color: 'primary.main',
+    color: 'warning.main',
     fontWeight: 'fontWeightMedium',
-    bgcolor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
+    bgcolor: alpha(theme.palette.warning.main, theme.palette.action.selectedOpacity),
     '&:before': { display: 'block' },
   };
 

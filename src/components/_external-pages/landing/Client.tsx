@@ -24,7 +24,7 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 export default function ClientPage() {
   return (
-    <RootStyle title="Khách hàng | Trade Zone Map" id="move_top">
+    <RootStyle title="Khách hàng | FreeFit" id="move_top">
       <ClientHero />
       <ScrollToTop />
       <ContentStyle>

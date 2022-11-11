@@ -381,8 +381,8 @@
     "noData": "No data!!!"
   },
   "login": {
-    "welcome": "Welcone to Trade zone map",
-    "title": "Sign in to Trade zone map",
+    "welcome": "Welcone to FreeFit",
+    "title": "Sign in to FreeFit",
     "options": "Enter your details below",
     "or": "OR",
     "username": "Username",
@@ -396,7 +396,7 @@
     "sectionTimeout": "Section time out, please login again!!!"
   },
   "ldPage": {
-    "appName": "Tradezone Map",
+    "appName": "FreeFit",
     "title": "TZM | A digital solution for a chain of stores",
     "slogan": "Solution for chain stores that is optimized for business areas - mastering your delivery",
     "subSlogan": "Using a map tool to manage location, information, and the division of business areas for each store, integrating solutions for chain businesses. Build websites quickly, schedule business areas, delivery solutions - distribute orders for drivers",
@@ -415,10 +415,10 @@
     "startNow": "Start now",
     "solution": "Solutions tailored to the retail industry's various businesses",
     "benefit": "Make your own brand on the platform",
-    "subBenefit": "Boost your business with Trade Zone Map powered tools designed to help you operate a full-fledged enterprise.",
+    "subBenefit": "Boost your business with FreeFit powered tools designed to help you operate a full-fledged enterprise.",
     "summary": "One platform that is suitable for retail businesses",
     "subSumnary": "Explore a variety of occupations and choose the one that best suits you",
-    "end": "Trade Zone Map is a great place to start establishing and growing your business!",
+    "end": "FreeFit is a great place to start establishing and growing your business!",
     "signUpNow": "Register now",
     "chain": "Business in a chain",
     "chainTitle": "Give a high-level overview of your store's business",
@@ -433,8 +433,8 @@
     "apiAccessDes": "Chúng tôi có chuẩn API cung cấp cho mọi doanh nghiệp. Chọn từ bộ API có sẵn và tùy chỉnh phần mềm quản lý vận chuyển hàng hóa của bạn.",
     "customfieldTemplates": "Tùy biến phù hợp với trang web cửa hàng",
     "customfieldTemplatesDes": "Các trường tùy chỉnh cho phép bạn nắm bắt thông tin trong một biểu mẫu dành riêng cho doanh nghiệp của bạn",
-    "logistics": "Hậu cần Trade Zone Map",
-    "logisticsDes": "Dịch vụ hậu cần của Trade Zone Map quản lý và theo dõi việc giao hàng đường dài để cải thiện hiệu quả chuỗi cung ứng của bạn",
+    "logistics": "Hậu cần FreeFit",
+    "logisticsDes": "Dịch vụ hậu cần của FreeFit quản lý và theo dõi việc giao hàng đường dài để cải thiện hiệu quả chuỗi cung ứng của bạn",
     "serviceApp": "Ứng dụng dịch vụ",
     "taskNotification": "Thông báo nhiệm vụ",
     "taskNotificationDes": "Tùy chỉnh cảnh báo hoạt động và giao tiếp trực tiếp với người quản lý, điều phối và khách hàng",
@@ -473,7 +473,7 @@
     "updateNow": "Cập nhật lập tức",
     "updateNowDes": "Tất cả các thay đổi của bạn đều tự động, vì vậy bạn sẽ nhận được các tính năng mới nhất ngay lập tức mà không gặp bất kỳ rắc rối nào",
     "support": "Đội ngũ hỗ trợ tận tâm",
-    "supportDes": "Nhóm hỗ trợ Trade Zone Map làm việc 24/7, hoặc bạn có thể gửi thông tin qua email, trò chuyện trực tiếp và điện thoại để đảm bảo luôn giải quyết các vấn đề cho bạn",
+    "supportDes": "Nhóm hỗ trợ FreeFit làm việc 24/7, hoặc bạn có thể gửi thông tin qua email, trò chuyện trực tiếp và điện thoại để đảm bảo luôn giải quyết các vấn đề cho bạn",
     "title": "Features | TZM"
   },
   "task": {

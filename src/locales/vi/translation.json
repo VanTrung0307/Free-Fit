@@ -514,7 +514,7 @@
     "noData": "Không có dữ liệu!!!"
   },
   "login": {
-    "welcome": "Chào mừng bạn đến với Trade zone map",
+    "welcome": "Chào mừng bạn đến với FreeFit",
     "title": "Đăng nhập vào hệ thống",
     "options": "Nhập thông tin tài khoản của bạn vào ô bên dưới",
     "or": "Hoặc",
@@ -529,9 +529,9 @@
     "sectionTimeout": "Phiên làm việc hết hạn, vui lòng đăng nhập lại!!!"
   },
   "ldPage": {
-    "appName": "Tradezone Map",
-    "title": "TZM | Giải pháp cho hệ thống chuỗi",
-    "slogan": "Giải pháp cho hệ thống chuỗi cửa hàng",
+    "appName": "FreeFit",
+    "title": "FreeFit",
+    "slogan": "",
     "subSlogan": "Quản lý tất cả các hoạt động giao hàng của bạn từ một nền tảng để nâng cao hiệu quả, thúc đẩy doanh số bán hàng và mang lại trải nghiệm khách hàng đặc biệt trên quy mô lớn",
     "manageStore": "Quản lí cửa hàng",
     "manageArea": "Quản lí khu vực kinh doanh",
@@ -548,10 +548,10 @@
     "startNow": "Bắt đầu ngay",
     "solution": "Các giải pháp được thiết kế cho mọi doanh nghiệp trong ngành bán lẻ",
     "benefit": "Sử dụng nền tảng với thương hiệu do bạn làm chủ",
-    "subBenefit": "Thúc đẩy cho doanh nghiệp của bạn với nhiều tính năng do Trade Zone Map cung cấp phù hợp để bạn điều hành một công việc kinh doanh toàn diện.",
+    "subBenefit": "Thúc đẩy cho doanh nghiệp của bạn với nhiều tính năng do FreeFit cung cấp phù hợp để bạn điều hành một công việc kinh doanh toàn diện.",
     "summary": "Một nền tảng cho mọi ngành kinh doanh",
     "subSumnary": "Khám phá nhiều ngành nghề và chọn nghề phù hợp nhất với bạn",
-    "end": "Bắt đầu xây dựng và phát triển kinh doanh ngay bây giờ với Trade Zone Map!",
+    "end": "Bắt đầu xây dựng và phát triển kinh doanh ngay bây giờ với FreeFit!",
     "signUpNow": "Đăng ký ngay",
     "chain": "Kinh doanh theo chuỗi",
     "chainTitle": "Cho cái nhìn tổng quan về hệ thống cửa hàng của bạn",
@@ -566,8 +566,8 @@
     "apiAccessDes": "Chúng tôi có chuẩn API cung cấp cho mọi doanh nghiệp. Chọn từ bộ API có sẵn và tùy chỉnh phần mềm quản lý vận chuyển hàng hóa của bạn.",
     "customfieldTemplates": "Tùy biến phù hợp với trang web cửa hàng",
     "customfieldTemplatesDes": "Các trường tùy chỉnh cho phép bạn nắm bắt thông tin trong một biểu mẫu dành riêng cho doanh nghiệp của bạn",
-    "logistics": "Hậu cần Trade Zone Map",
-    "logisticsDes": "Dịch vụ hậu cần của Trade Zone Map quản lý và theo dõi việc giao hàng đường dài để cải thiện hiệu quả chuỗi cung ứng của bạn",
+    "logistics": "Hậu cần FreeFit",
+    "logisticsDes": "Dịch vụ hậu cần của FreeFit quản lý và theo dõi việc giao hàng đường dài để cải thiện hiệu quả chuỗi cung ứng của bạn",
     "serviceApp": "Ứng dụng dịch vụ",
     "taskNotification": "Thông báo nhiệm vụ",
     "taskNotificationDes": "Tùy chỉnh cảnh báo hoạt động và giao tiếp trực tiếp với người quản lý, điều phối và khách hàng",
@@ -606,8 +606,8 @@
     "updateNow": "Cập nhật lập tức",
     "updateNowDes": "Tất cả các thay đổi của bạn đều tự động, vì vậy bạn sẽ nhận được các tính năng mới nhất ngay lập tức mà không gặp bất kỳ rắc rối nào",
     "support": "Đội ngũ hỗ trợ tận tâm",
-    "supportDes": "Nhóm hỗ trợ Trade Zone Map làm việc 24/7, hoặc bạn có thể gửi thông tin qua email, trò chuyện trực tiếp và điện thoại để đảm bảo luôn giải quyết các vấn đề cho bạn",
-    "title": "Tất cả tính năng | TZM"
+    "supportDes": "Nhóm hỗ trợ FreeFit làm việc 24/7, hoặc bạn có thể gửi thông tin qua email, trò chuyện trực tiếp và điện thoại để đảm bảo luôn giải quyết các vấn đề cho bạn",
+    "title": "Tất cả tính năng | FF"
   },
   "task": {
     "title": "Quản lí công việc",

@@ -33,14 +33,14 @@ export default function LandingPage() {
   return (
     <RootStyle title={t('ldPage.title')} id="move_top">
       <LandingHero />
-      <ContentStyle>
+      {/* <ContentStyle>
         <LandingMinimal />
         <LandingPartner />
         <LandingOptimize />
         <LandingWhitePlatform />
         <LandingDomain />
         <LandingAdvertisement />
-      </ContentStyle>
+      </ContentStyle> */}
     </RootStyle>
   );
 }

@@ -75,9 +75,9 @@ export default function LandingHero() {
 
         <MHidden width="mdDown">
           <HeroImgStyle
-            style={{ width: '50%' }}
+            style={{ width: '528px', height: '600px' }}
             alt="hero"
-            src="/static/home/LocationSearchBro.svg"
+            src="/static/favpng_kickboxing-muay-thai.png"
             variants={varFadeInUp}
           />
         </MHidden>
@@ -88,27 +88,27 @@ export default function LandingHero() {
               <Typography
                 component="span"
                 variant={isDesktop ? 'h2' : 'h3'}
-                sx={{ color: 'primary.main' }}
+                sx={{ color: 'warning.main' }}
               >
-                {t('ldPage.appName')} - {t('ldPage.slogan')}
+                {t('ldPage.appName')}
               </Typography>
             </motion.div>
 
-            <motion.div variants={varFadeInRight}>
+            {/* <motion.div variants={varFadeInRight}>
               <Typography fontWeight={500} variant="h4">
                 Nền tảng công nghệ{' '}
                 <Typography variant="h4" component="span">
                   tối ưu hóa khu vực kinh doanh - làm chủ hoạt động giao hàng.
                 </Typography>
               </Typography>
-            </motion.div>
+            </motion.div> */}
 
             <Stack
               direction="row"
               spacing={1.5}
               justifyContent={{ xs: 'center', md: 'flex-start' }}
             >
-              <motion.div variants={varFadeInRight}>
+              {/* <motion.div variants={varFadeInRight}>
                 <Button
                   size="large"
                   variant="contained"
@@ -118,7 +118,7 @@ export default function LandingHero() {
                 >
                   {t('ldPage.startNow')}
                 </Button>
-              </motion.div>
+              </motion.div> */}
               {/* <motion.div variants={varFadeInRight}>
                 <Button
                   size="large"
