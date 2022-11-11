@@ -37,7 +37,10 @@ import { Visibility } from '@mui/icons-material';
 import ResoTable from 'components/table/ResoTable';
 import { TTableColumn } from 'components/table/table';
 import { PATH_DASHBOARD } from 'routes/paths';
+import { Club } from 'models/freefit/club';
+import { Registration } from 'models/freefit/customer';
 import { fDate, fDateTimeSuffix2 } from 'utils/formatTime';
+import customerApi from 'api/FreeFitApi/customerApi';
 import { selectBrandTypeOptions, selectFilter, storeActions } from '../storeSlice';
 
 export default function CustomerList() {
@@ -79,43 +82,31 @@ export default function CustomerList() {
 
   const brandOptions = brandTypeOptions.map((c) => ({ label: c.name, value: c.id }));
 
-  const [brandName, setBrandName] = useState<any>(null);
+  const [name, setName] = useState<any>(null);
   const handleChange = (event: any, newValue: any) => {
-    setBrandName(newValue);
+    setName(newValue);
   };
 
   useEffect(() => {
-    if (brandName === null) {
+    if (name === null) {
       ref.current.formControl.setValue('SearchBy', '');
       ref.current.formControl.setValue('KeySearch', '');
     }
-    if (ref.current && brandName) {
-      ref.current.formControl.setValue('SearchBy', 'Brand');
-      ref.current.formControl.setValue('KeySearch', brandName.value);
+    if (ref.current && name) {
+      ref.current.formControl.setValue('SearchBy', 'name');
+      ref.current.formControl.setValue('KeySearch', name.value);
     }
-  }, [brandName]);
+  }, [name]);
 
-  type TStoreBase = {
-    address?: string;
-    brandId?: number;
-    brandName?: string;
-    building?: { id?: any; isEditable?: boolean; name?: string };
-    buildingId?: number;
-    createDate?: string;
-    id?: number;
-    imageUrl?: string;
-    name?: string;
-    status?: number;
-    storeCode?: string;
-    storeTypeId?: number;
-    storeTypeName?: string;
-    type?: string;
-    SearchBy?: string;
-    KeySearch?: string;
-    phone?: string;
-    bank?: string;
+  type TCustomerBase = {
+    id: number;
+    name: string;
+    phone: string;
+    email: string;
+    club: Club[];
+    registration: Registration[];
   };
-  const storeColumn: TTableColumn<TStoreBase>[] = [
+  const customerColumn: TTableColumn<TCustomerBase>[] = [
     {
       title: 'STT',
       dataIndex: 'index',
@@ -152,21 +143,11 @@ export default function CustomerList() {
     },
     {
       title: 'Họ và Tên',
-      dataIndex: 'KeySearch',
+      dataIndex: 'name',
       valueType: 'text',
       hideInTable: true,
-      hideInSearch: brandName!,
+      hideInSearch: name!,
       sortable: false,
-    },
-    {
-      title: 'Ngày Sinh',
-      dataIndex: 'createDate',
-      hideInSearch: true,
-      hideInTable: false,
-      sortable: false,
-      render(value, data, index) {
-        return <Box>{fDate(data?.createDate!)}</Box>;
-      },
     },
     {
       title: 'Số điện thoại',
@@ -175,18 +156,32 @@ export default function CustomerList() {
       sortable: false,
     },
     {
-      title: 'Ngày Tạo',
-      dataIndex: 'createDate',
+      title: 'Email',
+      dataIndex: 'email',
       hideInSearch: true,
-      hideInTable: false,
       sortable: false,
-      render(value, data, index) {
-        return <Box>{fDateTimeSuffix2(data?.createDate!)}</Box>;
-      },
     },
     {
-      title: 'Note',
-      dataIndex: 'address',
+      title: 'Địa chỉ phòng tập',
+      dataIndex: ['club', 'address'],
+      hideInSearch: true,
+      sortable: false,
+    },
+    {
+      title: 'Loại đăng kí',
+      dataIndex: ['registration', 'type'],
+      hideInSearch: true,
+      sortable: false,
+    },
+    {
+      title: 'Số lượng buổi tập',
+      dataIndex: ['registration', 'numberSessions'],
+      hideInSearch: true,
+      sortable: false,
+    },
+    {
+      title: 'Gói',
+      dataIndex: ['registration', 'packageId'],
       hideInSearch: true,
       sortable: false,
     },
@@ -217,10 +212,10 @@ export default function CustomerList() {
 
           <Page>
             <ResoTable
-              key={'store-id'}
+              key={'id'}
               ref={ref}
-              columns={storeColumn}
-              getData={storeApi.getAllPaging}
+              columns={customerColumn}
+              getData={customerApi.getAll}
               showAction={true}
               onDelete={handelRemoveClick}
               onEdit={(e) => navigate(`${PATH_DASHBOARD.customer.details}/${e.id}`)}

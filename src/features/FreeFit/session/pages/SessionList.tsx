@@ -177,7 +177,7 @@ export default function SessionList() {
 
           <Page>
             <ResoTable
-              key={'registerId'}
+              key={'id'}
               ref={ref}
               columns={sessionColumn}
               getData={sessionApi.getAll}

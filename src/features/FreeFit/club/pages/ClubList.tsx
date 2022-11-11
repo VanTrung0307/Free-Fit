@@ -31,7 +31,7 @@ import clubApi from 'api/FreeFitApi/clubApi';
 import ResoTable from 'components/table/ResoTable';
 import { TTableColumn } from 'components/table/table';
 import { PATH_DASHBOARD } from 'routes/paths';
-import { selectBrandTypeOptions, selectFilter, storeActions } from '../storeSlice';
+import { selectBrandTypeOptions, selectFilter, clubActions } from '../storeSlice';
 
 export default function ClubList() {
   const { themeStretch } = useSettings();
@@ -48,8 +48,8 @@ export default function ClubList() {
   const brandTypeOptions = useAppSelector(selectBrandTypeOptions);
 
   useEffect(() => {
-    dispatch(storeActions.fetchBrandType());
-    dispatch(storeActions.fetchProvince());
+    dispatch(clubActions.fetchBrandType());
+    dispatch(clubActions.fetchProvince());
   }, [dispatch, filter]);
 
   const handelRemoveClick = (store: Store) => {
@@ -60,7 +60,7 @@ export default function ClubList() {
     try {
       await storeApi.remove(storeSelected?.id || 0);
       const newFilter = { ...filter };
-      dispatch(storeActions.setFilter(newFilter));
+      dispatch(clubActions.setFilter(newFilter));
       enqueueSnackbar(`${storeSelected?.name} ${t('store.deleteSuccess')}`, { variant: 'success' });
 
       setStoreSelected(undefined);
@@ -157,7 +157,7 @@ export default function ClubList() {
               getData={clubApi.getAll}
               showAction={true}
               onDelete={handelRemoveClick}
-              onEdit={(e) => navigate(`${PATH_DASHBOARD.store.details}/${e.id}`)}
+              onEdit={(e) => navigate(`${PATH_DASHBOARD.club.details}/${e.id}`)}
             />
           </Page>
         </Container>

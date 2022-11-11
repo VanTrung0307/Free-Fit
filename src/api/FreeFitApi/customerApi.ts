@@ -1,33 +1,42 @@
 import { PaginationRequest, Response, Store, StoreType, TradeZone, BrandType } from 'models';
 import { AttrResponse } from 'models/dto/attrResponse';
-import { Club, PostClub } from 'models/freefit/club';
+import { Course } from 'models/freefit/course';
+import { Customer, PostCustomer } from 'models/freefit/customer';
 import { PostAttr } from '../../models/dto/attr';
 import { PostStore, Template, PostTemplate } from '../../models/dto/store';
 import axiosClient from '../axiosClient';
 
-const clubApi = {
-  getAll(): Promise<Array<Club>> {
-    const url = '/club';
+const customerApi = {
+  getAll(): Promise<Array<Customer>> {
+    const url = '/customer';
     return axiosClient.get(url);
   },
-  getAllPaging(params: PaginationRequest): Promise<Response<Club>> {
-    const url = '/club';
+  getAllPaging(params: PaginationRequest): Promise<Response<Customer>> {
+    const url = '/customer/paging';
     return axiosClient.get(url, { params });
   },
-  remove(id: number): Promise<Club> {
-    const url = `/club/${id}`;
-    return axiosClient.delete(url);
-  },
-  getClubById(id: string): Promise<Club> {
-    const url = `/club/ClubById${id}`;
+  getStoreTypes(): Promise<StoreType[]> {
+    const url = '/stores/store-type';
     return axiosClient.get(url);
   },
-  add(data: PostClub): Promise<Club> {
-    const url = '/club';
+  getBrandTypes(): Promise<BrandType[]> {
+    const url = '/brands';
+    return axiosClient.get(url);
+  },
+  remove(id: number): Promise<Store> {
+    const url = `/stores/brand/${id}`;
+    return axiosClient.delete(url);
+  },
+  getCustomerByEmail(email: string): Promise<Customer> {
+    const url = `/customer/CustomerByEmail${email}`;
+    return axiosClient.get(url);
+  },
+  add(data: PostCustomer): Promise<Customer> {
+    const url = '/customer';
     return axiosClient.post(url, data);
   },
-  update(id: number, data: PostClub): Promise<Club> {
-    const url = `/club/${id}`;
+  update(id: number, data: PostStore): Promise<Store> {
+    const url = `/stores/for-brand/${id}`;
     return axiosClient.put(url, data);
   },
   getAttrField(storeId: string, storeTypeId: string | undefined): Promise<AttrResponse[]> {
@@ -59,4 +68,4 @@ const clubApi = {
     return axiosClient.get(url);
   },
 };
-export default clubApi;
+export default customerApi;

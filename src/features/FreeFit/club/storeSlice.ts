@@ -15,10 +15,11 @@ import {
 } from 'models';
 import { toast } from 'react-toastify';
 import i18n from 'translation/i18n';
+import { Club } from 'models/freefit/club';
 
 export interface StoreState {
   loading: boolean;
-  response: Response<Store>;
+  response: Response<Club>;
   storesInGz: Store[];
   storesEmptyTz: Store[];
   filter: PaginationRequest;
@@ -72,17 +73,17 @@ const initialState: StoreState = {
   },
 };
 
-const storeSlice = createSlice({
-  name: 'store',
+const clubSlice = createSlice({
+  name: 'club',
   initialState,
   reducers: {
-    fetchStores(state, action: PayloadAction<PaginationRequest>) {
+    fetchClubs(state, action: PayloadAction<PaginationRequest>) {
       state.loading = true;
     },
-    fetchStore(state) {
+    fetchClub(state) {
       state.loading = true;
     },
-    fetchStoreSuccess(state, action: PayloadAction<Response<Store>>) {
+    fetchClubSuccess(state, action: PayloadAction<Response<Club>>) {
       state.loading = false;
       state.response = action.payload;
     },
@@ -195,7 +196,7 @@ const storeSlice = createSlice({
   },
 });
 // actions
-export const storeActions = storeSlice.actions;
+export const clubActions = clubSlice.actions;
 // selector
 export const selectStoreResponse = (state: RootState) => state.stores.storesInGz;
 export const selectStoresResponse = (state: RootState) => state.stores.response;
@@ -290,5 +291,5 @@ export const selectBuildingsOptions = createSelector(selectBuildings, (buildings
 );
 
 // reducers
-const storeReducer = storeSlice.reducer;
+const storeReducer = clubSlice.reducer;
 export default storeReducer;

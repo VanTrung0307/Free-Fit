@@ -50,6 +50,8 @@ export const PATH_DASHBOARD = {
   club: {
     root: path(ROOTS_DASHBOARD, '/manage-club'),
     add: path(ROOTS_DASHBOARD, '/manage-club/add'),
+    details: path(ROOTS_DASHBOARD, '/manage-club/details'),
+    editInfo: path(ROOTS_DASHBOARD, '/manage-club/details/edit-info'),
   },
   pt: {
     root: path(ROOTS_DASHBOARD, '/manage-pt'),

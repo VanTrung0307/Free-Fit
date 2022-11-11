@@ -72,6 +72,7 @@ export default function Router() {
           children: [
             { path: '/', element: <ClubList /> },
             { path: 'add', element: <AddEditClubPage /> },
+            { path: 'details/edit-info/:Id', element: <AddEditClubPage /> },
           ],
         },
         {

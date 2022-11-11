@@ -32,7 +32,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { PATH_DASHBOARD } from 'routes/paths';
 import ShopProductList from '../components/ShopProductList';
 import TemplateForm from '../components/TemplateForm';
-import { selectFilterTemplate, selectLoading, selectTemplate, storeActions } from '../storeSlice';
+import { selectFilterTemplate, selectLoading, selectTemplate, clubActions } from '../storeSlice';
 // ----------------------------------------------------------------------
 const ProductImgStyle = styled('img')(({ theme }) => ({
   top: 0,
@@ -79,7 +79,7 @@ export default function StoreTemplatePage() {
     })();
   }, [storeId]);
   useEffect(() => {
-    dispatch(storeActions.fetchStoreTemplates(filter));
+    dispatch(clubActions.fetchStoreTemplates(filter));
   }, [dispatch, filter]);
   const initialValues: PostTemplate = {
     url: '',
@@ -97,7 +97,7 @@ export default function StoreTemplatePage() {
         navigate(`${PATH_DASHBOARD.store.details}/${storeId}`);
       } else {
         const newFilter = { ...filter };
-        dispatch(storeActions.setFilter(newFilter));
+        dispatch(clubActions.setFilter(newFilter));
         navigate(`${PATH_DASHBOARD.template.root}`);
       }
     } catch (error) {
@@ -122,7 +122,7 @@ export default function StoreTemplatePage() {
   };
   const handelPagingNumberChange = (e: any, page: number) => {
     dispatch(
-      storeActions.setFilterTemplate({
+      clubActions.setFilterTemplate({
         ...filter,
         page,
       })

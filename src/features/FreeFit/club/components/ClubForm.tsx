@@ -2,26 +2,23 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import arrowCircleLeftOutline from '@iconify/icons-eva/arrow-circle-left-outline';
 import saveFill from '@iconify/icons-eva/save-fill';
 import { Icon } from '@iconify/react';
-import { DatePicker, LoadingButton, LocalizationProvider } from '@mui/lab';
-import { Autocomplete, Box, Button, Card, Grid, Stack, TextField, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import { Box, Button, Card, Grid, Stack, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { useDebouncedCallback } from 'components/common';
-import { AutoCompleteField } from 'components/form';
 import InputField from 'components/FormField/InputField';
-import SelectField from 'components/FormField/SelectField';
-import Images from 'constants/image';
+import { Dayjs } from 'dayjs';
 import { LatLngExpression } from 'leaflet';
-import { PostStore } from 'models';
-import { useEffect, useState } from 'react';
+import { PostClub } from 'models/freefit/club';
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { FormProvider, useForm, useFormState } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { PATH_DASHBOARD } from 'routes/paths';
-import { Dayjs } from 'dayjs';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import * as yup from 'yup';
 import {
+  clubActions,
   selectBrandTypeOptions,
   selectBuildingsOptions,
   selectCampusesOptions,
@@ -29,21 +26,19 @@ import {
   selectProvincesOptions,
   selectStoreTypeOptions,
   selectWardsOptions,
-  storeActions,
 } from '../storeSlice';
 
-interface StoreFormProps {
-  initialValue: PostStore;
-  onSubmit?: (formValue: PostStore) => void;
+interface ClubFormProps {
+  initialValue: PostClub;
+  onSubmit?: (formValue: PostClub) => void;
   isEdit: boolean;
   isView?: boolean;
 }
-export default function ClubForm({ initialValue, onSubmit, isEdit, isView }: StoreFormProps) {
+export default function ClubForm({ initialValue, onSubmit, isEdit, isView }: ClubFormProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const [imgLink, setImglink] = useState<string>(initialValue.imageUrl || Images.DEFAULT_IMG);
   const [address, setAddress] = useState(['']);
   const [location, setLocation] = useState<LatLngExpression>();
   const [provinceId, setProvinceId] = useState(0);
@@ -52,16 +47,19 @@ export default function ClubForm({ initialValue, onSubmit, isEdit, isView }: Sto
   const [campusId, setCampusId] = useState(0);
 
   useEffect(() => {
-    dispatch(storeActions.fetchBrandType());
-    dispatch(storeActions.fetchDistrictByProvince(provinceId));
-    dispatch(storeActions.fetchWardByDistrict(districtId));
-    dispatch(storeActions.fetchCampusByWard(wardId));
-    dispatch(storeActions.fetchBuildingByCampus(campusId));
+    dispatch(clubActions.fetchBrandType());
+    dispatch(clubActions.fetchDistrictByProvince(provinceId));
+    dispatch(clubActions.fetchWardByDistrict(districtId));
+    dispatch(clubActions.fetchCampusByWard(wardId));
+    dispatch(clubActions.fetchBuildingByCampus(campusId));
   }, [dispatch, provinceId, districtId, wardId, campusId]);
 
   // schema
   const schema = yup.object().shape({
-    name: yup.string().required(t('store.errorStoreName')),
+    // name: yup.string().required(t('store.errorStoreName')),
+    address: yup.string().required('Bạn cần nhập đầy đủ'),
+    area: yup.string().required('Bạn cần nhập đầy đủ'),
+    managerName: yup.string().required('Bạn cần nhập đầy đủ'),
     // imageUrl: yup.string().required(t('store.errorImg')),
     // coordinateString: yup.string().required(t('store.errorLocation')),
     // address: yup.string().required(t('store.errorAddress')),
@@ -113,12 +111,9 @@ export default function ClubForm({ initialValue, onSubmit, isEdit, isView }: Sto
     return option;
   };
 
-  const handelFormSubmit = (formValues: PostStore) => {
+  const handelFormSubmit = (formValues: PostClub) => {
     if (onSubmit) onSubmit(formValues);
   };
-  const handelInputFieldImgChange = useDebouncedCallback((e) => {
-    setImglink(e.target.value);
-  }, 500);
 
   const handelInputFieldAddress = useDebouncedCallback((value) => {
     // setAddress((prevState) => `${value}, ${prevState}`);
@@ -162,62 +157,17 @@ export default function ClubForm({ initialValue, onSubmit, isEdit, isView }: Sto
                   {'Thông tin Phòng tập'}
                 </Typography>
                 <Stack spacing={2}>
-                  {/* <Stack spacing={2}>
-                    <Box
-                      style={{
-                        display: 'flex',
-                        flexFlow: 'row nowrap',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderRadius: '10px',
-
-                        height: '25.5vh',
-                        width: '100%',
-                      }}
-                      mt={3}
-                      mb={3}
-                    >
-                      <Controller
-                        control={control}
-                        name="imageUrl"
-                        render={({ field }) => (
-                          <ImageForm {...field} value={field.value} title="Ảnh bìa" />
-                        )}
-                      />
-                    </Box>
-                  </Stack> */}
-                  {/* <InputField
-                    name="storeCode"
-                    label={`${t('store.storeCode')}*`}
-                    control={control}
-                    disabled={isView}
-                  /> */}
-                  <InputField
-                    name="name"
-                    label={`${'Tên Phòng Tập'}*`}
-                    control={control}
-                    disabled={isView}
-                  />
-                  <InputField
-                    name="phone"
-                    label={`${t('store.phone')}`}
-                    control={control}
-                    disabled={isView}
-                  />
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                      label="Ngày Đăng Kí"
-                      disabled={isView}
-                      value={day}
-                      onChange={(newValue) => {
-                        setDay(newValue);
-                      }}
-                      renderInput={(params) => <TextField {...params} />}
-                    />
-                  </LocalizationProvider>
                   <InputField
                     name="address"
-                    label={'Địa chỉ'}
+                    label={`${'Địa chỉ Phòng Tập'}*`}
+                    control={control}
+                    disabled={isView}
+                  />
+
+                  <InputField name="area" label={'Khu vực'} control={control} disabled={isView} />
+                  <InputField
+                    name="managerName"
+                    label={'Người quản lý'}
                     control={control}
                     disabled={isView}
                   />
@@ -225,7 +175,7 @@ export default function ClubForm({ initialValue, onSubmit, isEdit, isView }: Sto
               </Card>
             </Stack>
           </Grid>
-          <Grid item xs={12} md={6} sx={{ paddingRight: '350px' }}>
+          <Grid item xs={12} md={6}>
             {isView ? (
               <></>
             ) : (
@@ -235,7 +185,7 @@ export default function ClubForm({ initialValue, onSubmit, isEdit, isView }: Sto
                   flexFlow: 'row nowrap',
                   justifyContent: 'flex-end',
                   alignContent: 'center',
-                  backgroundColor: '#fff',
+                  backgroundColor: 'dark',
                   marginTop: '16px',
                 }}
               >

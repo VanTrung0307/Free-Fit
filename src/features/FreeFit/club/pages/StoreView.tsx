@@ -38,7 +38,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { PATH_DASHBOARD } from 'routes/paths';
 import AttrView from '../components/AttrView';
 import { Block } from '../components/Block';
-import { storeActions } from '../storeSlice';
+import { clubActions } from '../storeSlice';
 import './style.css';
 
 interface StoreViewPageProps {}
@@ -61,7 +61,7 @@ export default function StoreViewPage(props: StoreViewPageProps) {
   const [value, setValue] = useState('1');
   const [isErrorImage, setIsErrorImage] = useState<boolean>(false);
   useEffect(() => {
-    dispatch(storeActions.fetchStoreType());
+    dispatch(clubActions.fetchStoreType());
   }, [dispatch]);
   useEffect(() => {
     if (!storeId) return;
